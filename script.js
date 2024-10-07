@@ -1,3 +1,24 @@
+
+document.getElementById("open-nav").addEventListener("click", function (event) {
+  event.preventDefault();
+  document.querySelector(".nav-toggle").classList.toggle("active");
+});
+
+document
+  .getElementById("close-nav")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    document.querySelector(".nav-toggle").classList.toggle("active");
+  });
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".nav-toggle, .nav-links")) {
+    document.querySelector(".nav-toggle").classList.remove("active");
+  }
+});
+
+
+
 let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 const paginationItems = document.querySelectorAll(".pagination-item");
