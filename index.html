@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.all.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="script.js" defer></script>
+  <title>DROMJOR VENTURES| Website</title>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav id="nav" class="nav-bar">
+    <div class="nav-logo">
+      <img src="logo.png" alt="Logo" width="85" height="70" />
+    </div>
+
+    <div class="nav-toggle">
+      <i class="fas fa-bars" id="open-nav"></i>
+      <i class="fas fa-times" id="close-nav"></i>
+    </div>
+    <ul id="nav-links" class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Shop <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="completed.html">Fresh Produce</a></li>
+          <li><a href="ongoing.html">Dairy Products</a></li>
+          <li><a href="land.html">Meat and Seafood</a></li>
+        </ul>
+      </li>
+      <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Accommodation <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="office.html">Office Space</a></li>
+          <li><a href="Bungalow.html">Bungalow</a></li>
+          <li><a href="house.html">Housing</a></li>
+        </ul>
+      </li> -->
+      <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Logistics <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="equipment.html">Hiring Equipment</a></li>
+          <li><a href="materials.html">Building Materials</a></li>
+        </ul>
+      </li> -->
+      <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Mission & Vision <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="news.html">Our Mission</a></li>
+          <li><a href="price.html">Our Vision</a></li>
+        </ul>
+      </li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <!-- <a href="#" class="btn"><span>Admin Dashboard</span></a> -->
+    </ul>
+  </nav>
+
+<div class="search-container">
+  <h2>What are you looking for?</h2>
+  <div class="search-bar">
+    <input type="search" id="search-input" placeholder="Search...">
+    <button class="search-icon">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Slider -->
+<div class="slider-container">
+  <div class="slider">
+    <div class="slide active">
+      <img src="Images\img1.jpeg" alt="Image 1">
+      <div class="slide-content">
+        <h2>Fruits</h2>
+        <p>Get Healthy Fruits</p>
+        <button>Read More</button>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="Images\img2.jpeg" alt="Image 2">
+      <div class="slide-content">
+        <h2>Plantain</h2>
+        <p>Get fresh plantains</p>
+        <button>Read More</button>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="Images\img3.jpeg" alt="Image 3">
+      <div class="slide-content">
+        <h2>Vegetables</h2>
+        <p>Get fresh vegetable</p>
+        <button>Read More</button>
+      </div>
+    </div>
+    <!-- Add more slides here -->
+  </div>
+  <div class="slider-controls">
+    <button class="prev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+  <div class="pagination">
+    <span class="pagination-item active"></span>
+    <span class="pagination-item"></span>
+    <span class="pagination-item"></span>
+    <!-- Add more pagination items here -->
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
