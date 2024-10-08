@@ -921,25 +921,10 @@ body {
 }
 
 
-/* Tablet layout */
+/* Mobile layout */
 @media (max-width: 768px) {
   .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .contact-form {
-    width: 40%;
-  }
-}
-
-/* Mobile layout */
-@media (max-width: 480px) {
-  .products-grid {
     grid-template-columns: 1fr;
-  }
-
-  .contact-form {
-    width: 100%;
   }
 
   .header {
@@ -949,5 +934,53 @@ body {
 
   .see-all {
     margin-top: 10px;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+
+  .products-grid {
+    margin-top: 20px;
+  }
+}
+
+/* Small mobile layout */
+@media (max-width: 480px) {
+  .contact-form {
+    width: 1px;
+    padding: 10px;
+  }
+
+  .header h2 {
+    font-size: 16px;
+  }
+
+  .see-all {
+    font-size: 14px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Extra small mobile layout */
+@media (max-width: 320px) {
+  .contact-form {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .header h2 {
+    font-size: 14px;
+  }
+
+  .see-all {
+    font-size: 12px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
   }
 }
