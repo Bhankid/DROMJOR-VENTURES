@@ -457,13 +457,14 @@ body {
 
 .slide-content h2 {
   font-size: 24px;
-  color: rgb(27, 27, 27);
+  color: hsl(0, 0%, 100%);
   margin-bottom: 10px;
 }
 
 .slide-content p {
   font-size: 16px;
   margin-bottom: 20px;
+  color: hsl(0, 0%, 100%);
 }
 
 .slide-content button {
@@ -497,7 +498,7 @@ body {
 .prev,
 .next {
   background-color: transparent;
-  border: 1px solid black;
+  border: 1px solid rgb(189, 188, 188);
   padding: 10px;
   font-size: 24px;
   cursor: pointer;
@@ -505,7 +506,7 @@ body {
 
 .prev i,
 .next i {
-  color: #ef0707;
+  color: #f8f8f8;
 }
 
 .prev:hover i,
