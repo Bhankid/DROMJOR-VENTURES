@@ -54,3 +54,7 @@ nextButton.addEventListener("click", nextSlide);
 setInterval(nextSlide, 5000);
 
 showSlide();
+
+
+// Footer
+  document.getElementById("year").innerHTML = new Date().getFullYear();
