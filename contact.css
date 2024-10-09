@@ -124,15 +124,23 @@ button[type="submit"]:hover {
 }
 
 
-/* Add media queries for tablet and mobile views */
 
 /* Tablet view (768px - 1023px) */
 @media only screen and (max-width: 1023px) {
+      .container-all {
+  display: block;
+}
   .contact-form {
-    width: 70vw;
-    height: 80vh;
+    width: 90vw;
+    height: 70vh;
     margin: 40px auto;
-    padding: 20px; 
+    padding: 15px; 
+  }
+   .map {
+    width: 90vw;
+    height: 50vh;
+    margin: 20px auto;
+    padding: 15px;
   }
   .container-f {
     width: 90vw;
@@ -160,11 +168,22 @@ button[type="submit"]:hover {
 
 /* Mobile view (up to 767px) */
 @media only screen and (max-width: 767px) {
+    .container-all {
+  display: block;
+}
   .contact-form {
     width: 90vw;
     height: 90vh;
     margin: 140px auto;
     padding: 15px;
+  }
+  .map {
+    width: 20px;
+    height: 60vh;
+    margin: 20px auto;
+    margin-bottom: 180px;
+    margin-right: 840px;
+    padding: 0;
   }
   .container-f {
     width: 90vw;
