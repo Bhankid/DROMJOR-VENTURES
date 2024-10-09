@@ -1,0 +1,96 @@
+.contact-form {
+  background-image: linear-gradient(to bottom, hsl(182, 39%, 52%), hsl(119, 100%, 29%));
+  background-size: 100% 300px;
+  background-position: 0% 100%;
+  transition: background-position 0.5s ease-out;
+  width: 50vw;
+  height: 90vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 20px auto;
+  margin-top: 120px;
+}
+
+.contact-form:hover {
+  background-position: 0% 0%;
+}
+
+.container-f {
+  width: 80vw;
+  margin: 60px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  font-size: 18px;
+  color: #666;
+  transition: top 0.5s ease-out;
+}
+
+input:focus + label, textarea:focus + label {
+  top: -25px;
+  font-size: 14px;
+  color: #333;
+}
+
+input:focus::placeholder, textarea:focus::placeholder {
+  opacity: 0; 
+}
+input::placeholder, textarea::placeholder {
+  opacity: 0; 
+}
+
+button[type="submit"] {
+  background-color: hsl(182, 39%, 52%);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: hsla(182, 80%, 24%, 0.863);
+}

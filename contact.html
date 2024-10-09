@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="contact.css" />
+    <link rel="icon" href="dromo-logo.png" loading="lazy" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.all.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <title>DROMJOR VENTURES</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav id="nav" class="nav-bar">
+        <div class="nav-logo">
+            <img src="dromo-logo.png" alt="Logo" width="250" height="75" />
+        </div>
+
+        <div class="nav-toggle">
+            <i class="fas fa-bars" id="open-nav"></i>
+            <i class="fas fa-times" id="close-nav"></i>
+        </div>
+        <ul id="nav-links" class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle">Shop <i class="bx bxs-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="completed.html">Fresh Produce</a></li>
+                    <li><a href="ongoing.html">Dairy Products</a></li>
+                    <li><a href="land.html">Meat and Seafood</a></li>
+                    <li><a href="land.html">Others</a></li>
+                </ul>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <!-- <a href="#" class="btn"><span>Admin Dashboard</span></a> -->
+        </ul>
+        <!-- search bar -->
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search...">
+                <button class="search-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+ 
+    <!-- Contact -->
+    <section class="contact-form" id="contact">
+        <div class="container-f">
+            <h2>Get in Touch</h2>
+            <p>Leave us a message and we'll get back to you soon!</p>
+            <form>
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Your Name">
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Your Email">
+                    <label for="email">Your Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Your Phone Number">
+                    <label for="phone">Your Phone Number</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Your Message"></textarea>
+                    <label for="message">Your Message</label>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <img src="dromo-logo.png" alt="Company Logo" class="footer-logo">
+                    <p>Make an Inquiry: <a href="tel:+2335948155987" class="tel">+2335948155987</a></p>
+                    <ul class="social-icons">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <div class="app-icons">
+                        <h2 class="app-header">Get Our Apps On</h2>
+                        <img src="Images\playstore.jpg" alt="playstore">
+                        <img src="Images\appstore.jpg" alt="playstore">
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h2>Payment Methods</h2>
+                    <div class="payment-methods">
+                        <img src="Images\mobile money.png" alt="momo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Dromjor Ventures. All rights reserved.</p>
+            <p> <a href="https://www.msoftghana.com/en/" target="_blank" class="from">Powered by Msoft Ghana</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
