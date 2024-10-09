@@ -1,3 +1,14 @@
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+ font-family: "poppins", sans-serif;
+   background: url("https://i.postimg.cc/dtdnhrBb/img2.jpg");
+   background-attachment: fixed;
+}
+
+
 .contact-form {
   background-image: linear-gradient(to bottom, hsl(182, 39%, 52%), hsl(119, 100%, 29%));
   background-size: 100% 300px;
@@ -93,4 +104,75 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: hsla(182, 80%, 24%, 0.863);
+}
+
+
+/* Add media queries for tablet and mobile views */
+
+/* Tablet view (768px - 1023px) */
+@media only screen and (max-width: 1023px) {
+  .contact-form {
+    width: 70vw;
+    height: 80vh;
+    margin: 40px auto; /* Add some space from top and bottom */
+    padding: 20px; /* Add some padding to fit the container nicely */
+  }
+  .container-f {
+    width: 90vw;
+    margin: 20px auto;
+    padding: 15px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+  input, textarea {
+    padding: 8px;
+    font-size: 16px;
+  }
+  label {
+    padding: 8px;
+    font-size: 16px;
+  }
+  button[type="submit"] {
+    padding: 8px 15px;
+  }
+}
+
+/* Mobile view (up to 767px) */
+@media only screen and (max-width: 767px) {
+  .contact-form {
+    width: 90vw;
+    height: 90vh;
+    margin: 140px auto; /* Add some space from top and bottom */
+    padding: 15px; /* Add some padding to fit the container nicely */
+  }
+  .container-f {
+    width: 90vw;
+    margin: 10px auto;
+    padding: 10px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 14px;
+  }
+  input, textarea {
+    padding: 6px;
+    font-size: 14px;
+  }
+  label {
+    padding: 6px;
+    font-size: 14px;
+  }
+  button[type="submit"] {
+    padding: 6px 10px;
+  }
+  /* Make the form fields full-width on mobile */
+  .form-group {
+    width: 100%;
+  }
 }
