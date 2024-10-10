@@ -7,11 +7,29 @@
 }
 
 .contact-form {
-  width: 30%;
-  height: 95vh;
+  width: 30vw;
+  height: 100vh;
   padding: 20px;
   background-color: #ffffff69;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  gap: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .contact-form {
+  width: 80vw;
+  height: 100vh;
+  padding: 20px;
+  background-color: #ffffff69;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.header h2 {
+  margin: 0 auto;
+  text-align: center;
+ font-size: 2rem;
+}
 }

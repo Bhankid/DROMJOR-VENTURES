@@ -141,7 +141,7 @@ body {
   transform: translateY(-10px);
   padding-block: 30px;
   border-radius: 8px;
-  animation: fadeIn 2s 0.5s;
+  animation: fadeIn 1s 0.5s;
 }
 
 .dropdown-menu li {
@@ -158,7 +158,7 @@ body {
 }
 
 .dropdown-menu a:hover {
-  color: white;
+  color: rgb(205, 203, 203);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -230,8 +230,9 @@ body {
   }
 
   .nav-logo {
-    margin-right: 50px;
-    padding-left: 30px;
+    width: 120px;
+    margin-right: 90px;
+    padding-left: 20px;
     margin-left: 8px;
     color: var(--color-white);
     margin-bottom: 2px;
@@ -248,7 +249,7 @@ body {
     display: block;
     cursor: pointer;
     color: white;
-    margin-right: 20px;
+    margin-right: 5px;
   }
 
   .dropdown-menu {
@@ -277,15 +278,16 @@ body {
 
 @media (max-width: 480px) {
   .nav-logo {
-    margin-right: 20px;
-    padding-left: 15px;
-    margin-left: 5px;
+    width: 80px;
+    margin-right: 170px;
+    padding-left: 5px;
+    margin-left: 2px;
     color: var(--color-white);
     margin-bottom: 2px;
   }
 
   .search-container {
-    margin-right: 80px;
+    margin-right: 60px;
   }
 }
 
@@ -302,9 +304,9 @@ body {
   align-items: center;
   background-color: #f7f7f7a5;
   border: 1px solid #cccccc9c;
-  border-radius: 15px;
-  padding: 4px;
-  height: 45px;
+  border-radius: 17px;
+  padding: 3px;
+  height: 40px;
 }
 
 .search-bar input[type="search"] {
@@ -313,13 +315,13 @@ body {
   border: none;
   border-radius: 10px 0 0 10px;
   font-size: 10px;
-  height: 30px;
+  height: 28px;
 }
 
 .search-bar button.search-icon {
   background-color: transparent;
   border: none;
-  padding: 8px;
+  padding: 7px;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
 }
@@ -339,7 +341,7 @@ body {
 
 @media (max-width: 768px) {
   .search-container {
-    max-width: 150px;
+    max-width: 120px;
     margin-right: 50px;
   }
 
@@ -351,6 +353,7 @@ body {
   .search-bar input[type="search"] {
     padding: 5px;
     font-size: 8px;
+    display: none;
   }
 
   .search-bar button.search-icon {
@@ -374,6 +377,7 @@ body {
     padding: 0;
     height: 13px;
     font-size: 6px;
+    display: none;
   }
 
   .search-bar button.search-icon {
@@ -397,6 +401,8 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   transition: transform 1s ease-in-out;
 }
@@ -591,7 +597,8 @@ body {
 
   .prev,
   .next {
-    display: none;
+    display: block;
+    font-size: 15px;
   }
 
   .card-container {
@@ -623,7 +630,8 @@ body {
 
   .prev,
   .next {
-    display: none;
+    display: block;
+    font-size: 13px;
   }
 
   .card-container {
@@ -723,6 +731,7 @@ body {
     margin-left: 0;
     margin: 10px auto;
     margin-bottom: 5px;
+    padding-bottom: 0;
   }
 
   .card-grid {
@@ -812,6 +821,7 @@ body {
 .products {
   padding: 70px 0;
   /* background-color: #f7f7f742; */
+  margin: 0 auto;
 }
 
 .container {
@@ -819,6 +829,7 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .header {

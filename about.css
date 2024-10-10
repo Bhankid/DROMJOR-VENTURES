@@ -53,7 +53,8 @@ body {
 
 .passage {
   padding: 20px;
-  margin-inline: 80px;
+  width: 80vw;
+  margin: 0 auto;
   margin-bottom: 80px; 
   background-color: #f7f7f7;
   border-radius: 6px;
