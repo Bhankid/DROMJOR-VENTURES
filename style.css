@@ -397,6 +397,7 @@ body {
   margin: 90px 0 0 100px;
   position: relative;
   display: inline-block;
+  position: relative;
 }
 
 .slider {
@@ -490,7 +491,7 @@ body {
 
 .slide-content button {
   background-color: #ed1414;
-  color: #fff;
+  color: hsl(0, 0%, 100%);
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -534,7 +535,7 @@ body {
 
 .prev:hover i,
 .next:hover i {
-  color: #ccc;
+  color: hsl(0, 0%, 71%);
 }
 
 .pagination {
@@ -548,13 +549,14 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #ccc;
-  margin: 0 10px;
+  background-color: hsl(0, 4%, 90%);
+  margin: 0 8px;
   cursor: pointer;
+  display: inline-block;
 }
 
 .pagination-item.active {
-  background-color: #333;
+  background-color: hsl(182, 39%, 52%);
 }
 
 /* Add animation effects for pagination */
@@ -563,7 +565,7 @@ body {
 }
 
 .pagination-item:hover {
-  background-color: #444;
+  background-color: hsl(0, 4%, 90%);
 }
 
 .pagination-item.active {
@@ -588,9 +590,11 @@ body {
 /* Media Query for slider */
 @media (max-width: 768px) {
   .slider-container {
-    width: 90vw;
+    width: 85vw;
     height: 40vh;
-    margin: 40px 0 0 25px;
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
     margin-top: 100px;
   }
 
@@ -645,7 +649,6 @@ body {
     height: 30vh;
     margin: 10px auto;
     margin-top: 100px;
-    margin-left: 13px;
   }
 
   .prev,
@@ -788,15 +791,15 @@ body {
 /* Intro section */
 
 .introduction {
-  background-color: #dadada;
-  margin-top: 10px;
+  background: linear-gradient(to bottom, #ffffff 0%, #dadada 100%);
+  margin-top: 5px;
   padding-top: 0;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding-block: -10px;
+  /* padding-block: -10px; */
 }
 
 .row {
@@ -822,13 +825,14 @@ body {
   object-fit: cover;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .row {
     flex-direction: column;
   }
 
   .introduction {
-    margin-block: 0;
+    margin-bottom: 0 !important;
+    padding-block: 0 !important;
   }
 
   .text,
@@ -837,11 +841,20 @@ body {
   }
 }
 
+@media only screen and (max-width: 480px) {
+  .introduction {
+    margin-bottom: 0 !important;
+  }
+  .products {
+    margin-top: 0 !important;
+  }
+}
+
 /* Products and services */
 .products {
   padding: 70px 0;
-  /* background-color: #f7f7f742; */
   margin: 0 auto;
+  background: linear-gradient(to bottom, #dadada 0%, #ffffff 100%);
 }
 
 .container {
@@ -995,19 +1008,20 @@ body {
 }
 
 /* Mobile view (up to 767px) */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .products-grid {
     grid-template-columns: repeat(1, 1fr);
     width: 90%;
     margin: 10px auto;
   }
   .products {
-    margin-top: 10px;
-    padding-top: 0;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
    .container {
     flex-direction: column;
+     padding-block: 0 !important;
    }
 
   .contact-form {
