@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="all.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="Images\favicon.png" loading="lazy" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <title>DROMJOR VENTURES</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav id="nav" class="nav-bar">
+        <div class="nav-logo">
+            <img src="dromo-logo.png" alt="Logo" width="250" height="75" />
+        </div>
+
+        <div class="nav-toggle">
+            <i class="fas fa-bars" id="open-nav"></i>
+            <i class="fas fa-times" id="close-nav"></i>
+        </div>
+        <ul id="nav-links" class="nav-links show">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About Us</a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle">Shop <i class="bx bxs-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="fresh.html">Fresh Produce</a></li>
+                    <li><a href="dairy.html">Dairy Products</a></li>
+                    <li><a href="meats.html">Meat and Seafood</a></li>
+                    <li><a href="other.html">Others</a></li>
+                </ul>
+            </li>
+            <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Accommodation <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="office.html">Office Space</a></li>
+          <li><a href="Bungalow.html">Bungalow</a></li>
+          <li><a href="house.html">Housing</a></li>
+        </ul>
+      </li> -->
+            <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Logistics <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="equipment.html">Hiring Equipment</a></li>
+          <li><a href="materials.html">Building Materials</a></li>
+        </ul>
+      </li> -->
+            <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Mission & Vision <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="news.html">Our Mission</a></li>
+          <li><a href="price.html">Our Vision</a></li>
+        </ul>
+      </li> -->
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li>
+                <a href="tel:+2335948155987" class="btn-order">
+                    <i class="fas fa-phone"></i> Call 05948155987 <br> to Order
+                </a>
+            </li>
+        </ul>
+        <!-- search bar -->
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search...">
+                <button class="search-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Slider -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active">
+                <img src="https://i.postimg.cc/13xnvRT6/dromojor-Website-landscape.jpg" alt="Image 1">
+                <div class="slide-content">
+                    <h2>Fruits</h2>
+                    <p>Get Healthy Fruits</p>
+                    <button>Read More</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://i.postimg.cc/t7GqNJT4/Ampesi-Banner-landscape.jpg" alt="Image 2">
+                <div class="slide-content">
+                    <h2>Plantain</h2>
+                    <p>Get fresh plantains</p>
+                    <button>Read More</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://i.postimg.cc/LXz26Rvd/Breakfast-3x-landscape.jpg" alt="Image 3">
+                <div class="slide-content">
+                    <h2>Vegetables</h2>
+                    <p>Get fresh vegetable</p>
+                    <button>Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="pagination">
+            <span class="pagination-item active"></span>
+            <span class="pagination-item"></span>
+            <span class="pagination-item"></span>
+        </div>
+    </div>
+
+    <!-- Offers -->
+    <section class="card-container">
+        <!-- <h2>Image Gallery</h2> -->
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-content">
+                    <!-- <h3 class="card-title">Offer 1</h3> -->
+                    <img class="card-image" src="https://i.postimg.cc/wxQgCq7L/Laundry-Banner-landscape.jpg"
+                        alt="Image 1">
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-content">
+                    <!-- <h3 class="card-title">Offer 2</h3> -->
+                    <img class="card-image" src="https://i.postimg.cc/tCmQbYyZ/Fish-Market-landscape.jpg" alt="Image 2">
+                </div>
+            </article>
+            <!-- <article class="card">
+        <div class="card-content">
+         
+          <img class="card-image" src="Images\img2.jpeg" alt="Image 3">
+        </div>
+      </article> -->
+        </div>
+    </section>
+
+    <!-- Products and services -->
+    <section class="products-1">
+        <div class="header-1">
+            <h2>All Items</h2>
+        </div>
+        <div class="container">
+            <div class="products-grid" data-aos="zoom-in-down">
+                <div class="product">
+                    <img src="https://i.postimg.cc/85zKR0qC/MIlo-Sachet-square-jpg.jpg" alt="Product 1">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="Images\img5.jpeg" alt="Product 2">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="Images\img6.jpeg" alt="Product 3">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="Images\img7.jpeg" alt="Product 4">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="Images\img3.jpeg" alt="Product 5">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="Images\img2.jpeg" alt="Product 6">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/G3q6PH47/Caption-under-weekend-vibesm-square-jpg.jpg"
+                        alt="Product 7">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/tCJwBpPX/Cassava.jpg" alt="Product 8">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/5y07KSXP/frozenstewbeef.jpg" alt="Product 9">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/zvcdsHWq/rice.png" alt="Product 10">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/597kYTrD/Snails.jpg" alt="Product 11">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+                <div class="product">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="order-now"> <a href="order.html">Order Now</a></button>
+                </div>
+            </div>
+            <!-- <div class="contact-form" data-aos="zoom-in-left">
+        <h2>Fill to order</h2>
+        <form>
+          <input type="text" placeholder="Name">
+          <input type="tel" placeholder="Phone Number">
+          <input type="text" placeholder="Name of Items">
+          <input type="number" placeholder="Quantity">
+          <input type="text" placeholder="Location">
+          <textarea placeholder="Address"></textarea>
+          <textarea placeholder="Message"></textarea>
+          <input type="submit">
+        </form>
+      </div> -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <img src="dromo-logo.png" alt="Company Logo" class="footer-logo">
+                    <p>Make an Inquiry: <a href="tel:+2335948155987" class="tel">+2335948155987</a></p>
+                    <ul class="social-icons">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <div class="app-icons">
+                        <h2 class="app-header">Get Our Apps On</h2>
+                        <img src="Images\playstore.jpg" alt="playstore">
+                        <img src="Images\appstore.jpg" alt="playstore">
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h2>Payment Methods</h2>
+                    <div class="payment-methods">
+                        <img src="Images\mobile money.png" alt="momo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Dromjor Ventures. All rights reserved.</p>
+            <p> <a href="https://www.msoftghana.com/en/" target="_blank" class="from">Powered by Msoft Ghana</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
