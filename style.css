@@ -348,6 +348,7 @@ body {
   .search-bar {
     padding: 5px;
     height: 30px;
+    border-radius: 40%;
   }
 
   .search-bar input[type="search"] {
@@ -371,6 +372,7 @@ body {
   .search-bar {
     padding: 2px;
     height: 16px;
+    border-radius: 40%;
   }
 
   .search-bar input[type="search"] {
@@ -493,6 +495,7 @@ body {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .slider-controls {
@@ -594,6 +597,23 @@ body {
   .slide img {
     border-radius: 10px;
   }
+  .slide-content {
+  position: absolute;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.091);
+  color: #131313;
+  border-radius: 5px;
+}
+.slide-content button {
+  background-color: #ed1414;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
   .prev,
   .next {
@@ -730,7 +750,7 @@ body {
     display: block;
     margin-left: 0;
     margin: 10px auto;
-    margin-bottom: 5px;
+    margin-bottom: 0;
     padding-bottom: 0;
   }
 
@@ -751,7 +771,7 @@ body {
     display: block;
     margin-left: 0;
     margin: 10px auto;
-    margin-bottom: 5px;
+    margin-bottom: 0;
   }
 
   .card-grid {
@@ -768,9 +788,9 @@ body {
 /* Intro section */
 
 .introduction {
-  padding-block: -10px;
   background-color: #dadada;
-  margin-block: -90px;
+  margin-top: 10px;
+  padding-top: 0;
 }
 
 .container {
@@ -979,7 +999,11 @@ body {
   .products-grid {
     grid-template-columns: repeat(1, 1fr);
     width: 90%;
-    margin: 10 auto;
+    margin: 10px auto;
+  }
+  .products {
+    margin-top: 10px;
+    padding-top: 0;
   }
 
    .container {
@@ -1002,6 +1026,7 @@ body {
      display: flex;
      justify-content: space-between;
      flex-direction: column;
+     padding-bottom: 80px;
    }
    .header h2 {
      font-size: 18px;
