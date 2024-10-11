@@ -1068,7 +1068,8 @@ ul .cart-item {
 @media only screen and (max-width: 480px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
   }
   .products {
     margin-top: 0 !important;
