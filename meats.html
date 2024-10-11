@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="fresh.css" />
     <link rel="icon" href="Images\favicon.png" loading="lazy" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -51,14 +50,36 @@
                 <ul class="dropdown-menu">
                     <li><a href="fresh.html">Fresh Produce</a></li>
                     <li><a href="dairy.html">Dairy Products</a></li>
-                    <li><a href="#meats">Meat and Seafood</a></li>
-                    <li><a href="other.html">Others</a></li> 
+                    <li><a href="meats.html">Meat and Seafood</a></li>
+                    <li><a href="other.html">Others</a></li>
                 </ul>
             </li>
+            <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Accommodation <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="office.html">Office Space</a></li>
+          <li><a href="Bungalow.html">Bungalow</a></li>
+          <li><a href="house.html">Housing</a></li>
+        </ul>
+      </li> -->
+            <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Logistics <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="equipment.html">Hiring Equipment</a></li>
+          <li><a href="materials.html">Building Materials</a></li>
+        </ul>
+      </li> -->
+            <!-- <li class="dropdown">
+        <a href="#" class="nav-link dropdown-toggle">Mission & Vision <i class="bx bxs-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="news.html">Our Mission</a></li>
+          <li><a href="price.html">Our Vision</a></li>
+        </ul>
+      </li> -->
             <li><a href="contact.html" class="nav-link">Contact</a></li>
             <li>
                 <a href="tel:+2335948155987" class="btn-order">
-                    <i class="fas fa-phone"></i> Call 05948155987 <br> to Order
+                    <i class="fas fa-phone"></i>Call to Order<br> 05948155987
                 </a>
             </li>
         </ul>
@@ -69,11 +90,23 @@
             <ul>
                 <li class="cart-item">
                     <i class="fa-solid fa-cart-shopping cart-icon" id="cart-icon"></i>
-                    <span class="cart-notification">0</span>
+                    <span class="cart-notification" id="count">0</span>
                 </li>
             </ul>
         </span>
     </nav>
+
+    <!-- cart sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
+            <h2>My Cart</h2>
+            <p>Your cart is empty</p>
+        </div>
+        <!-- This will be the container for the cart items -->
+        <div class="cart-items"></div>
+    </div>
+
 
     <!-- Products and services -->
     <section class="products" id="meats">
@@ -88,7 +121,8 @@
                     <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
                 </div>
                 <div class="product">
-                    <img src="Images\img5.jpeg" alt="Product 2"><button class="add-to-cart">Add to cart</button>
+                    <img src="Images\img5.jpeg" alt="Product 2">
+                    <button class="add-to-cart">Add to cart</button>
                     <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
                 </div>
                 <div class="product">
@@ -139,7 +173,7 @@
                 <div class="product">
                     <img src="Images\img5.jpeg" alt="Product 9">
                     <button class="add-to-cart">Add to cart</button>
-                <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
                 </div>
                 <div class="product">
                     <img src="Images\img6.jpeg" alt="Product 10">

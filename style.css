@@ -977,6 +977,7 @@ Desktop Slider
     height: 30vh;
     margin: 10px auto;
     margin-top: 100px;
+    margin-bottom: 10px;
   }
 
   .prev,
@@ -1008,7 +1009,7 @@ Desktop Slider
 /* Offers */
 .card-container {
   width: 31vw;
-  height: 40vh;
+  height: 50vh;
   margin: 75px auto;
   padding: 0;
   background-color: transparent;
@@ -1081,8 +1082,8 @@ Desktop Slider
     display: block;
     margin-left: 0;
     margin: 10px auto;
-    margin-bottom: 0;
-    padding-bottom: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
   }
 
   .card-grid {
@@ -1102,7 +1103,7 @@ Desktop Slider
     display: block;
     margin-left: 0;
     margin: 10px auto;
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
 
   .card-grid {
@@ -1171,8 +1172,8 @@ Desktop Slider
 @media only screen and (max-width: 480px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 35px;
-    padding-top: 80px;
+    margin-top: 45px;
+    padding-top: 100px;
   }
   .products {
     margin-top: 0 !important;
@@ -1181,8 +1182,8 @@ Desktop Slider
 @media only screen and (max-width: 320px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 30px;
-    padding-top: 70px;
+    margin-top: 50px;
+    padding-top: 100px;
   }
   .products {
     margin-top: 0 !important;
@@ -1281,6 +1282,19 @@ Desktop Slider
 
 .add-to-cart:hover {
   background-color: hsla(119, 100%, 29%, 0.621);
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: hsl(119, 100%, 29%);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.product-name:hover {
+  color: hsla(119, 100%, 29%, 0.621);
 }
 
 /* .order-now {

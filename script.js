@@ -56,6 +56,8 @@ setInterval(nextSlide, 5000);
 showSlide();
 
 
+// Add to Cart SideBar
+
 // Get the cart icon, cart sidebar, and close icon elements
 const cartIcon = document.getElementById('cart-icon');
 const cartSidebar = document.querySelector('.cart-sidebar');
@@ -72,6 +74,8 @@ closeIcon.addEventListener('click', () => {
   cartSidebar.classList.remove('open');
 });
 
+// Get the cart items container element
+const cartItemsContainer = document.querySelector('.cart-items');
 
 // Get all "Add to cart" buttons
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -90,6 +94,22 @@ addToCartButtons.forEach((button) => {
 
     // Update the cart notification span with the new count
     cartNotificationSpan.textContent = count;
+
+    // Get the product details from the clicked button's parent element
+    const product = button.parentNode;
+    const productName = product.querySelector('h2').textContent;
+    const productImage = product.querySelector('img').src;
+    const productHTML = `
+      <div class="cart-item">
+        <img src="${productImage}" alt="${productName}">
+        <h2>${productName}</h2>
+      </div>
+    `;
+    
+    // Add the product to the cart items container
+    const cartItem = document.createElement('div');
+    cartItem.innerHTML = productHTML;
+    cartItemsContainer.appendChild(cartItem);
   });
 });
 

@@ -66,14 +66,27 @@
             <button class="search-icon">
                 <i class="fas fa-search"></i>
             </button>
+            <!-- index.html -->
             <ul>
                 <li class="cart-item">
                     <i class="fa-solid fa-cart-shopping cart-icon" id="cart-icon"></i>
-                    <span class="cart-notification">0</span>
+                    <span class="cart-notification" id="count">0</span>
                 </li>
             </ul>
         </span>
     </nav>
+
+    <!-- Add a new div for the cart sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
+            <h2>My Cart</h2>
+            <p>Your cart is empty</p>
+        </div>
+        <!-- This will be the container for the cart items -->
+        <div class="cart-items"></div>
+    </div>
+
 
     <!-- Products and services -->
     <section class="products" id="fresh">
@@ -85,12 +98,12 @@
             <div class="products-grid">
                 <div class="product">
                     <img src="Images\img4.jpeg" alt="Product 1">
-                    <button class="add-to-cart">Add to cart</button>
+                    <button class="add-to-cart" id="count">Add to cart</button>
                     <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
                 </div>
                 <div class="product">
                     <img src="Images\img5.jpeg" alt="Product 2">
-                    <button class="add-to-cart">Add to cart</button>
+                    <button class="add-to-cart" id="count">Add to cart</button>
                     <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
                 </div>
                 <div class="product">
