@@ -56,5 +56,42 @@ setInterval(nextSlide, 5000);
 showSlide();
 
 
+// Get the cart icon, cart sidebar, and close icon elements
+const cartIcon = document.getElementById('cart-icon');
+const cartSidebar = document.querySelector('.cart-sidebar');
+const closeIcon = document.getElementById('close-icon');
+
+// Add event listeners to the cart icon and close icon
+cartIcon.addEventListener('click', () => {
+  // Toggle the open class on the cart sidebar
+  cartSidebar.classList.toggle('open');
+});
+
+closeIcon.addEventListener('click', () => {
+  // Remove the open class from the cart sidebar
+  cartSidebar.classList.remove('open');
+});
+
+
+// Get all "Add to cart" buttons
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+// Get the cart notification span
+const cartNotificationSpan = document.getElementById('count');
+
+// Initialize the count
+let count = 0;
+
+// Add an event listener to each button
+addToCartButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // Increment the count
+    count++;
+
+    // Update the cart notification span with the new count
+    cartNotificationSpan.textContent = count;
+  });
+});
+
 // Footer
   document.getElementById("year").innerHTML = new Date().getFullYear();

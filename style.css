@@ -601,7 +601,7 @@ ul .cart-item {
   .cart-notification {
     position: absolute;
     top: -6px; 
-    right: 18px; 
+    right: 33px; 
     background-color: hsl(182, 77%, 28%);
     color: #fff;
     font-size: 10px;
@@ -612,8 +612,112 @@ ul .cart-item {
   }
 }
 
+/* 
+======================================================
+Cart SideBar
+======================================================
 
-/*Desktop Slider */
+======================================================
+*/
+
+/* Style for the cart sidebar */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 37vw;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 8000;
+}
+
+.cart-sidebar.open {
+  transform: translateX(0);
+}
+
+.cart-header {
+  padding: 20px;
+  border-bottom: 2px solid hsl(182, 77%, 28%);
+}
+
+.cart-header h2 {
+  margin-top: 30px;
+  color: hsl(182, 77%, 28%);
+  padding-bottom: 20px;
+}
+
+.cart-items {
+  padding: 20px;
+}
+
+/* Style the cart icon */
+.cart-icon {
+  cursor: pointer;
+}
+/* Style the close icon */
+.close-icon {
+  position: absolute;
+  cursor: pointer;
+  font-size: 24px;
+  top: 40px;
+  right: 40px;
+}
+
+/* Media query for tablets (portrait and landscape) */
+@media only screen and (max-width: 1024px) {
+  .cart-sidebar {
+    width: 50vw;
+    z-index: 8000;
+  }
+
+  .cart-header {
+    padding: 35px;
+  }
+
+  .cart-items {
+    padding: 15px;
+  }
+}
+
+/* Media query for mobiles (portrait and landscape) */
+@media only screen and (max-width: 768px) {
+  .cart-sidebar {
+    width: 80vw;
+  }
+
+  .cart-header {
+    padding: 30px;
+  }
+
+  .cart-items {
+    padding: 10px;
+  }
+}
+
+/* Media query for small mobiles (portrait) */
+@media only screen and (max-width: 480px) {
+  .cart-sidebar {
+    width: 90vw;
+  }
+
+  .cart-header {
+    padding: 25px;
+  }
+
+  .cart-items {
+    padding: 5px;
+  }
+}
+
+/*
+======================================================================
+Desktop Slider
+====================================================================
+
+*/
 
 .slider-container {
   width: 58vw;
@@ -1064,12 +1168,21 @@ ul .cart-item {
     width: 100%;
   }
 }
-
 @media only screen and (max-width: 480px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 30px;
+    margin-top: 35px;
     padding-top: 80px;
+  }
+  .products {
+    margin-top: 0 !important;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .introduction {
+    margin-bottom: 0 !important;
+    margin-top: 30px;
+    padding-top: 70px;
   }
   .products {
     margin-top: 0 !important;

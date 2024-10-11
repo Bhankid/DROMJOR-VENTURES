@@ -90,12 +90,22 @@
       <ul>
         <li class="cart-item">
           <i class="fa-solid fa-cart-shopping cart-icon" id="cart-icon"></i>
-          <span class="cart-notification">0</span>
+          <span class="cart-notification" id="count">0</span>
         </li>
       </ul>
     </span>
   </nav>
 
+<!-- Add a new div for the cart sidebar -->
+<div class="cart-sidebar">
+  <div class="cart-header">
+    <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
+    <h2>My Cart</h2>
+    <p>Your cart is empty</p>
+  </div>
+  <!-- This will be the container for the cart items -->
+  <div class="cart-items"></div>
+</div>
 
   <!-- Slider -->
   <div class="slider-container">
@@ -202,62 +212,62 @@
       <div class="products-grid" data-aos="zoom-in-down">
         <div class="product">
           <img src="https://i.postimg.cc/85zKR0qC/MIlo-Sachet-square-jpg.jpg" alt="Product 1">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="Images\img5.jpeg" alt="Product 2">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="Images\img6.jpeg" alt="Product 3">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="Images\img7.jpeg" alt="Product 4">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="Images\img3.jpeg" alt="Product 5">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="Images\img2.jpeg" alt="Product 6">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="https://i.postimg.cc/G3q6PH47/Caption-under-weekend-vibesm-square-jpg.jpg" alt="Product 7">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="https://i.postimg.cc/tCJwBpPX/Cassava.jpg" alt="Product 8">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="https://i.postimg.cc/5y07KSXP/frozenstewbeef.jpg" alt="Product 9">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="https://i.postimg.cc/zvcdsHWq/rice.png" alt="Product 10">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="https://i.postimg.cc/597kYTrD/Snails.jpg" alt="Product 11">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product">
           <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
-          <button class="add-to-cart">Add to cart</button>
+          <button class="add-to-cart" id="count">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
       </div>
