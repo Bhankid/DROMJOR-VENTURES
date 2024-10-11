@@ -653,6 +653,15 @@ Cart SideBar
   padding: 20px;
 }
 
+.cart-items img {
+   width: 50px;
+   height: 40px;
+}
+
+.cart-items h2 {
+  font-size: 0.5rem;
+}
+
 /* Style the cart icon */
 .cart-icon {
   cursor: pointer;
