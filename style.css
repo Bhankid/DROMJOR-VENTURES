@@ -1056,7 +1056,7 @@ ul .cart-item {
   .introduction {
     margin-bottom: 0 !important;
     padding-top: 100px;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   .text,
@@ -1068,8 +1068,8 @@ ul .cart-item {
 @media only screen and (max-width: 480px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 20px;
-    padding-top: 20px;
+    margin-top: 30px;
+    padding-top: 80px;
   }
   .products {
     margin-top: 0 !important;
