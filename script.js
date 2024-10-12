@@ -83,35 +83,118 @@ const addToCartButtons = document.querySelectorAll('.add-to-cart');
 // Get the cart notification span
 const cartNotificationSpan = document.getElementById('count');
 
+// Get the cart status paragraph
+const cartStatus = document.querySelector('.cart-header p');
+
 // Initialize the count
 let count = 0;
+
+// Toastr js
+// Initialize an object to store cart items
+let cartItems = {};
+
+// Configure Toastr options
+toastr.options = {
+  closeButton: true,
+  debug: false,
+  newestOnTop: false,
+  progressBar: true,
+  positionClass: "toast-top-right",
+  preventDuplicates: false,
+  onclick: null,
+  showDuration: "200",
+  hideDuration: "800",
+  timeOut: "3000",
+  extendedTimeOut: "800",
+  showEasing: "swing",
+  hideEasing: "linear",
+  showMethod: "slideDown",
+  hideMethod: "fadeOut",
+  escapeHtml: false,
+};
 
 // Add an event listener to each button
 addToCartButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    // Increment the count
-    count++;
-
-    // Update the cart notification span with the new count
-    cartNotificationSpan.textContent = count;
-
     // Get the product details from the clicked button's parent element
     const product = button.parentNode;
+    const productId = product.dataset.productId; // Ensure each product has a unique data-product-id attribute
     const productName = product.querySelector('h2').textContent;
     const productImage = product.querySelector('img').src;
-    const productHTML = `
-      <div class="cart-item">
-        <img src="${productImage}" alt="${productName}">
-        <h2>${productName}</h2>
+
+    if (cartItems[productId]) {
+      // If the item is already in the cart, increase its quantity
+      cartItems[productId].quantity++;
+      updateCartItemDisplay(productId);
+    } else {
+      // If it's a new item, add it to the cart
+      cartItems[productId] = {
+        name: productName,
+        image: productImage,
+        quantity: 1
+      };
+      addNewCartItemToDisplay(productId);
+    }
+
+    // Update the total count
+    updateTotalCount();
+
+    // Update the cart status
+    updateCartStatus();
+
+    // Show toast alert using Toastr with custom class for animation
+    toastr.success(
+      `
+      <div style="display: flex; align-items: center;">
+        <img src="${productImage}" alt="${productName}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 50%;">
+        <span>${productName} has been added to your cart!</span>
       </div>
-    `;
-    
-    // Add the product to the cart items container
-    const cartItem = document.createElement('div');
-    cartItem.innerHTML = productHTML;
-    cartItemsContainer.appendChild(cartItem);
+    `,
+      "Added to Cart",
+      {
+        className: "toast-success animated",
+      }
+    );
   });
 });
+
+function updateCartItemDisplay(productId) {
+  const cartItemElement = document.querySelector(`.cart-item[data-product-id="${productId}"]`);
+  if (cartItemElement) {
+    const quantityElement = cartItemElement.querySelector('.cart-item-quantity');
+    quantityElement.textContent = cartItems[productId].quantity;
+  }
+}
+
+function addNewCartItemToDisplay(productId) {
+  const productHTML = `
+    <div class="cart-item" data-product-id="${productId}">
+      <div class="cart-item-image-container">
+        <img src="${cartItems[productId].image}" alt="${cartItems[productId].name}">
+        <span class="cart-item-quantity">${cartItems[productId].quantity}</span>
+      </div>
+      <h2>${cartItems[productId].name}</h2>
+    </div>
+  `;
+
+  const cartItem = document.createElement('div');
+  cartItem.innerHTML = productHTML;
+  cartItemsContainer.appendChild(cartItem);
+}
+
+function updateTotalCount() {
+  const totalCount = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+  cartNotificationSpan.textContent = totalCount;
+}
+
+function updateCartStatus() {
+  if (cartItemsContainer.children.length > 0) {
+    cartStatus.textContent = 'You have items in your cart';
+  } else {
+    cartStatus.textContent = 'Your cart is empty';
+  }
+}
+
 
 // Footer
   document.getElementById("year").innerHTML = new Date().getFullYear();
