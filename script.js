@@ -67,11 +67,29 @@ const closeIcon = document.getElementById('close-icon');
 cartIcon.addEventListener('click', () => {
   // Toggle the open class on the cart sidebar
   cartSidebar.classList.toggle('open');
+
+  // Prevent body scrolling when the cart sidebar is open
+  if (cartSidebar.classList.contains('open')) {
+    document.body.classList.add('no-scroll');
+  } else {
+    document.body.classList.remove('no-scroll');
+  }
 });
 
 closeIcon.addEventListener('click', () => {
   // Remove the open class from the cart sidebar
   cartSidebar.classList.remove('open');
+  document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled
+});
+
+// Close sidebar on outside click
+document.addEventListener('click', (event) => {
+  const isClickInside = cartSidebar.contains(event.target) || cartIcon.contains(event.target);
+  
+  if (!isClickInside && cartSidebar.classList.contains('open')) {
+    cartSidebar.classList.remove('open');
+    document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled
+  }
 });
 
 // Get the cart items container element
@@ -174,11 +192,24 @@ function addNewCartItemToDisplay(productId) {
         <span class="cart-item-quantity">${cartItems[productId].quantity}</span>
       </div>
       <h2>${cartItems[productId].name}</h2>
+      <input type="number" class="cart-item-quantity-input" value="${cartItems[productId].quantity}" min="0" step="1">
+      <span class="remove-item">
+        <i class="fas fa-trash-alt"></i>
+      </span>
     </div>
   `;
 
-  const cartItem = document.createElement('div');
+  const cartItem = document.createElement("div");
   cartItem.innerHTML = productHTML;
+
+  // Add event listener to the recycle bin icon
+  cartItem.querySelector(".remove-item").addEventListener("click", () => {
+    // Remove the cart item
+    cartItemsContainer.removeChild(cartItem);
+    // Update the cart items count and total
+    updateCartItemsCountAndTotal();
+  });
+
   cartItemsContainer.appendChild(cartItem);
 }
 

@@ -553,7 +553,7 @@ ul .cart-item {
 @media only screen and (max-width: 768px) {
   .cart-icon {
     font-size: 18px;
-    padding: 8px;
+    padding: 10px;
     position: fixed;
     top: 20px;
     right: 20px;
@@ -587,8 +587,8 @@ ul .cart-item {
 
   .cart-notification {
     position: absolute;
-    top: -9px;
-    right: -4px;
+    top: 5px;
+    right: -15px;
     background-color: hsl(182, 77%, 28%);
     color: #fff;
     font-size: 12px;
@@ -602,8 +602,8 @@ ul .cart-item {
 /* Media query for mobile view (320px and below) */
 @media only screen and (max-width: 320px) {
   .cart-icon {
-    font-size: 14px;
-    padding: 4px;
+    font-size: 15px;
+    padding: 6px;
     position: fixed;
     top: 35px;
     right: 5px;
@@ -612,8 +612,8 @@ ul .cart-item {
 
   .cart-notification {
     position: absolute;
-    top: -6px;
-    right: 33px;
+    top: 8px;
+    right: 48px;
     background-color: hsl(182, 77%, 28%);
     color: #fff;
     font-size: 10px;
@@ -635,6 +635,8 @@ Cart SideBar
 /* Style for the cart sidebar */
 .cart-sidebar {
   position: fixed;
+  overflow-y: auto;
+  /* Make the cart sidebar scrollable */
   top: 0;
   right: 0;
   width: 37vw;
@@ -644,6 +646,22 @@ Cart SideBar
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   z-index: 8000;
+}
+
+.cart-sidebar::-webkit-scrollbar {
+  width: 0;
+  /* Hide the scrollbar in WebKit browsers */
+  height: 0;
+}
+
+.cart-sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+  /* Hide the scrollbar thumb in WebKit browsers */
+}
+
+.cart-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+  /* Hide the scrollbar track in WebKit browsers */
 }
 
 .cart-sidebar.open {
@@ -678,6 +696,7 @@ Cart SideBar
 .cart-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-block: 20px;
   padding-left: 20px;
 }
@@ -710,15 +729,28 @@ Cart SideBar
   font-weight: bold;
 }
 
+.cart-item-quantity-input {
+  width: 40px;
+  height: 25px;
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
 .cart-item h2 {
   margin: 0;
   font-size: 16px;
 }
 
 .cart-items h2 {
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   display: flex;
   flex-direction: row;
+  font-weight: 500;
+  margin-left: 40px;
 }
 
 /* Style the cart icon */
@@ -778,6 +810,105 @@ Cart SideBar
 
   .cart-items {
     padding: 5px;
+  }
+}
+
+.remove-item {
+  cursor: pointer;
+  color: red;
+  padding-right: 20px;
+}
+
+.remove-item:hover {
+  color: darkred;
+}
+
+.cart-footer {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f4f4f4;
+  padding-top: 16px;
+  z-index: 999;
+  position: sticky;
+  bottom: 0;
+  /* max-height: calc(100vh - 5rem); */
+}
+
+.cart-footer .subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.subtotal span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: hsl(182, 77%, 28%);
+  padding-left: 20px;
+}
+
+.subtotal span input[type="number"] {
+  width: 80px;
+  height: 20px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 50px;
+}
+
+.cart-footer a {
+  color: hsl(182, 77%, 28%);
+  text-decoration: none;
+}
+
+.cart-footer button {
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+  background-color: hsl(182, 77%, 28%);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cart-footer .continue-shopping {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.875rem;
+}
+
+.cart-footer .continue-shopping a {
+  color: hsl(182, 77%, 28%);
+  text-decoration: none;
+}
+
+
+/* Tablet devices (768px and below) */
+@media only screen and (max-width: 768px) {
+  .cart-footer {
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
+
+  .cart-footer button {
+    width: 100%;
+  }
+}
+
+/* Mobile devices (480px and below) */
+@media only screen and (max-width: 480px) {
+  .cart-footer {
+    padding: 5px;
+  }
+
+  .cart-footer button {
+    width: 100%;
   }
 }
 
