@@ -23,6 +23,13 @@
         integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- jQuery for Toastr -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="script.js" defer></script>
     <title>DROMJOR VENTURES</title>
@@ -107,122 +114,174 @@
         <div class="cart-items"></div>
     </div>
 
-
-    <!-- Products and services -->
-    <section class="products" id="meats">
-        <div class="header">
-            <h2>Meat and Seafood</h2>
-        </div>
-        <div class="container">
-            <div class="products-grid">
-                <div class="product">
-                    <img src="Images\img4.jpeg" alt="Product 1">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img5.jpeg" alt="Product 2">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img5.jpeg" alt="Product 2">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img6.jpeg" alt="Product 3">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img7.jpeg" alt="Product 4">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img7.jpeg" alt="Product 4">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img3.jpeg" alt="Product 5">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now">Order Now</button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img2.jpeg" alt="Product 6">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img1.jpeg" alt="Product 7">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img4.jpeg" alt="Product 8">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img4.jpeg" alt="Product 8">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img5.jpeg" alt="Product 9">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img6.jpeg" alt="Product 10">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img2.jpeg" alt="Product 11">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img2.jpeg" alt="Product 11">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img7.jpeg" alt="Product 12">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img7.jpeg" alt="Product 12">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
-                </div>
-                <div class="product">
-                    <img src="Images\img7.jpeg" alt="Product 12">
-                    <button class="add-to-cart">Add to cart</button>
-                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+    <!-- Slider -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active">
+                <img src="https://i.postimg.cc/13xnvRT6/dromojor-Website-landscape.jpg" alt="Image 1">
+                <div class="slide-content">
+                    <h2>Fruits</h2>
+                    <p>Get Healthy Fruits</p>
+                    <button>Read More</button>
                 </div>
             </div>
-            <!-- <div class="contact-form">
-                <h2>Fill to order</h2>
-                <form>
-                    <input type="text" placeholder="Name">
-                    <input type="tel" placeholder="Phone Number">
-                    <input type="text" placeholder="Name of Items">
-                    <input type="number" placeholder="Quantity">
-                    <input type="text" placeholder="Location">
-                    <textarea placeholder="Address"></textarea>
-                    <textarea placeholder="Message"></textarea>
-                    <input type="submit">
-                </form>
-            </div> -->
+            <div class="slide">
+                <img src="https://i.postimg.cc/t7GqNJT4/Ampesi-Banner-landscape.jpg" alt="Image 2">
+                <div class="slide-content">
+                    <h2>Plantain</h2>
+                    <p>Get fresh plantains</p>
+                    <button>Read More</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://i.postimg.cc/LXz26Rvd/Breakfast-3x-landscape.jpg" alt="Image 3">
+                <div class="slide-content">
+                    <h2>Vegetables</h2>
+                    <p>Get fresh vegetable</p>
+                    <button>Read More</button>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="pagination">
+            <span class="pagination-item active"></span>
+            <span class="pagination-item"></span>
+            <span class="pagination-item"></span>
+        </div>
+    </div>
+
+    <!-- Offers -->
+    <section class="card-container">
+        <!-- <h2>Image Gallery</h2> -->
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-content">
+                    <!-- <h3 class="card-title">Offer 1</h3> -->
+                    <img class="card-image" src="https://i.postimg.cc/wxQgCq7L/Laundry-Banner-landscape.jpg"
+                        alt="Image 1">
+                </div>
+            </article>
+            <article class="card">
+                <div class="card-content">
+                    <!-- <h3 class="card-title">Offer 2</h3> -->
+                    <img class="card-image" src="https://i.postimg.cc/tCmQbYyZ/Fish-Market-landscape.jpg" alt="Image 2">
+                </div>
+            </article>
+            <!-- <article class="card">
+        <div class="card-content">
+         
+          <img class="card-image" src="Images\img2.jpeg" alt="Image 3">
+        </div>
+      </article> -->
         </div>
     </section>
 
-    <!-- Footer -->
+
+    <!-- Products and services -->
+    <section class="products">
+        <div class="header">
+            <h2>Meats and Seafoods</h2>
+            <!-- <a href="all.html" class="see-all">See All</a> -->
+        </div>
+        <div class="container">
+            <div class="products-grid" data-aos="zoom-in-down">
+                <div class="product" data-product-id="1">
+                    <img src="https://i.postimg.cc/85zKR0qC/MIlo-Sachet-square-jpg.jpg" alt="Product 1">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Milo Sachet</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="2">
+                    <img src="Images\img5.jpeg" alt="Product 2">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Vegetable</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="2">
+                    <img src="Images\img6.jpeg" alt="Product 3">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Yam</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="3">
+                    <img src="Images\img7.jpeg" alt="Product 4">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Fruits</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="4">
+                    <img src="Images\img3.jpeg" alt="Product 5">
+                    <button class="add-to-cart" id="count">Add to cart</button>
+                    <h2 class="product-name">Spices</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="5">
+                    <img src="Images\img2.jpeg" alt="Product 6">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">plantains</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="6">
+                    <img src="https://i.postimg.cc/G3q6PH47/Caption-under-weekend-vibesm-square-jpg.jpg"
+                        alt="Product 7">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Mango</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="7">
+                    <img src="https://i.postimg.cc/tCJwBpPX/Cassava.jpg" alt="Product 8">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Cassava Dough</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="8">
+                    <img src="https://i.postimg.cc/5y07KSXP/frozenstewbeef.jpg" alt="Product 9">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Frozen Beef</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="9">
+                    <img src="https://i.postimg.cc/zvcdsHWq/rice.png" alt="Product 10">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Rice</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="10">
+                    <img src="https://i.postimg.cc/597kYTrD/Snails.jpg" alt="Product 11">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Snail</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+                <div class="product" data-product-id="11">
+                    <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
+                    <button class="add-to-cart">Add to cart</button>
+                    <h2 class="product-name">Salted Fish</h2>
+                    <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
+                </div>
+            </div>
+            <!-- <div class="contact-form" data-aos="zoom-in-left">
+        <h2>Fill to order</h2>
+        <form>
+          <input type="text" placeholder="Name">
+          <input type="tel" placeholder="Phone Number">
+          <input type="text" placeholder="Name of Items">
+          <input type="number" placeholder="Quantity">
+          <input type="text" placeholder="Location">
+          <textarea placeholder="Address"></textarea>
+          <textarea placeholder="Message"></textarea>
+          <input type="submit">
+        </form>
+      </div> -->
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-columns">
