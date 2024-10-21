@@ -1,0 +1,134 @@
+ body {
+     margin: 0;
+     font-family: 'Arial', sans-serif;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     background-color: #fef6f3;
+ }
+
+ .log-header {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     background-color: #f1eaea;
+     z-index: 1000;
+     padding: 10px;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ }
+
+ .log-header h1 {
+    text-align: right;
+    font-size: 2rem;
+    padding-right: 30px;
+ }
+
+ .log-container {
+     display: flex;
+     width: 85vw;
+     height: 80%;
+     background-color: white;
+     border-radius: 5px;
+     margin-top: 100px;
+     overflow: hidden;
+     flex-direction: column;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .log-header p {
+     margin: 0;
+     color: #f0eaea;
+     font-size: 14px;
+ }
+
+ .main-content {
+     display: flex;
+     flex: 1;
+ }
+
+ .left {
+     flex: 1;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     padding: 20px;
+     background-color: hsl(183, 50%, 28%);
+ }
+
+ .left h1 {
+     color: hsl(0, 0%, 99%);
+     margin-bottom: 20px;
+ }
+
+ .left h2 {
+     color: hsl(0, 0%, 95%);
+     margin-bottom: 10px;
+ }
+
+ .left form {
+     width: 100%;
+     max-width: 300px;
+ }
+
+ .left form input {
+     width: 100%;
+     padding: 10px;
+     margin: 10px 0;
+     border: 1px solid #ddd;
+     border-radius: 2px;
+ }
+
+ .left form .btn {
+     width: 100%;
+     padding: 10px;
+     background-color: #0eb95b;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+ }
+
+ .left form .btn:hover {
+     background-color: #058940;
+ }
+
+ .left form .forgot {
+     text-align: right;
+     color: hsl(236, 47%, 81%);
+     text-decoration: none;
+     font-size: 12px;
+ }
+
+ .signup {
+    color: hsl(0, 0%, 93%);
+ }
+
+ .left form .signup {
+     text-align: center;
+     margin-top: 10px;
+     font-size: 12px;
+ }
+
+ .left form .signup a {
+     color: hsl(236, 47%, 81%);
+     text-decoration: none;
+ }
+
+ .right {
+     flex: 1;
+     background-color: #ffece6;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+ }
+
+ .right img {
+     width: 80%;
+     height: auto;
+     border-radius: 0;
+     box-shadow: none;
+ }

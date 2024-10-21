@@ -1,0 +1,8 @@
+CREATE TABLE cart (
+    cart_id INT PRIMARY KEY AUTO_INCREMENT,
+    image VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    amount DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

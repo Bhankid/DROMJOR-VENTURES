@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="dashboard.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="sidebar closed" id="sidebar">
+        <h2>Dromjor Admin <i class="fas fa-user-shield"></i></h2>
+        <a href="login.html" class="active"><i class="fas fa-home" data-id="home"></i> Home</a>
+        <a href="#"><i class="fas fa-dollar-sign" data-id="invoice"></i> Invoices</a>
+        <a href="#"><i class="fas fa-dollar-sign" data-id="expense"></i> Expense</a>
+        <a href="#"><i class="fas fa-box active" data-id="products"></i> Products</a>
+        <a href="#"><i class="fas fa-shopping-cart" data-id="orders"></i> Orders</a>
+        <a href="#"><i class="fas fa-layer-group" data-id="f-products"></i> Featured Products</a>
+        <a href="#"><i class="fas fa-layer-group" data-id="categories"></i> Categories</a>
+        <a href="#"><i class="fas fa-users" data-id="customers"></i> Customers</a>
+        <a href="#" class="logout"><i class="fas fa-sign-out-alt" data-id="logout"></i> Logout</a>
+    </div>
+    <div class="content shifted" id="content">
+        <div class="header">
+            <span class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></span>
+            <input type="text" placeholder="Search...">
+            <div class="icons">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+        <section class="home content-1 active" data-id="home">
+            <nav class="log-header">
+                <h1>
+                    Powered by Msoft Ghana
+                </h1>
+            </nav>
+            <div class="log-container">
+                <div class="main1-content">
+                    <div class="left">
+                        <h1>
+                            Login Here...
+                        </h1>
+                        <h2>
+                            Welcome back !!!
+                        </h2>
+                        <h2>
+                            Sign in
+                        </h2>
+                        <form>
+                            <input placeholder="Email" type="email" value="" />
+                            <input placeholder="Password" type="password" value="" />
+                            <a class="forgot" href="#">
+                                Forgot Password ?
+                            </a>
+                            <button class="btn" type="submit">
+                                SIGN IN
+                            </button>
+                            <div class="signup">
+                                I don't have an account ?
+                                <a href="#">
+                                    Sign up
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="right">
+                        <img alt="Illustration of a person with a shopping cart" height="400"
+                            src="https://storage.googleapis.com/a1aa/image/IeMzX9sNg9TnJSHOu6Grh8Sz2cKbSwCZaVbCTeWy2g4RZwnTA.jpg"
+                            width="400" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="main-content content-1" data-id="invoice">
+            <h1>Invoices</h1>
+            <p>Manage and generate invoices</p>
+            <button class="btn"><i class="fas fa-plus"></i> Generate Invoice</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Invoice ID</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INV-001</td>
+                        <td>Akua Agyeiwaa</td>
+                        <td>&#8373;599.95</td>
+                        <td>
+                            <select class="status-select" id="statusSelect">
+                                <option value="paid" selected>Paid</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </td>
+                        <td>View</td>
+                    </tr>
+                    <tr>
+                        <td>INV-002</td>
+                        <td>Efua Owusu</td>
+                        <td>&#8373;123.45</td>
+                        <td>
+                            <select class="status-select" id="statusSelect">
+                                <option value="paid" selected>Paid</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </td>
+                        <td>View</td>
+                    </tr>
+                    <tr>
+                        <td>INV-002</td>
+                        <td>Michael Agyemang</td>
+                        <td>&#8373;123.45</td>
+                        <td>
+                            <select class="status-select" id="statusSelect">
+                                <option value="paid" selected>Paid</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </td>
+                        <td>View</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Products -->
+        <section class="content-1" data-id="products">
+            <h1>Products</h1>
+            <p>Manage your product inventory</p>
+            <button class="add-product"><i class="fas fa-plus"></i> Add Product</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Product 1</td>
+                        <td>Electronics</td>
+                        <td>&#8373;999.99</td>
+                        <td>50</td>
+                        <td class="actions">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash delete"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Product 2</td>
+                        <td>Fresh Foods</td>
+                        <td>&#8373;999.99</td>
+                        <td>100</td>
+                        <td class="actions">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash delete"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Product 3</td>
+                        <td>Meat and Seafood</td>
+                        <td>&#8373;999.99</td>
+                        <td>200</td>
+                        <td class="actions">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash delete"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="c-container content-1" data-id="customers">
+            <h1>Customers</h1>
+            <p class="subtitle">Manage your customer database</p>
+            <table>
+                <thead class="table-header">
+                    <tr>
+                        <th class="header-name">Name</th>
+                        <th class="header-telephone">Telephone</th>
+                        <th class="header-orders">Total Orders</th>
+                        <th class="header-spent">Total Spent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row">
+                        <td class="row-name">Alice Johnson</td>
+                        <td class="row-telephone">+233 24 987 6543</td>
+                        <td class="row-orders">5</td>
+                        <td class="row-spent">&#8373;599.95</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="row-name">Bob Smith</td>
+                        <td class="row-telephone">+233 55 901 2345</td>
+                        <td class="row-orders">3</td>
+                        <td class="row-spent">&#8373;329.97</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="row-name">Charlie Brown</td>
+                        <td class="row-telephone">+233 27 765 4321</td>
+                        <td class="row-orders">7</td>
+                        <td class="row-spent">&#8373;889.93</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Categories Section -->
+        <section class="cat-container content-1" data-id="categories">
+            <h1>Categories</h1>
+            <p>Manage your product categories</p>
+            <button class="add-category"><i class="fas fa-plus"></i> Add Category</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fresh Foods</td>
+                        <td>2024-10-15</td>
+                        <td class="actions">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Meat and Seafood</td>
+                        <td>2024-10-14</td>
+                        <td class="actions">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cereals and Grains</td>
+                        <td>2024-10-13</td>
+                        <td class="actions">
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="orders-container content-1" data-id="orders">
+            <h1>Orders</h1>
+            <p>Manage and track customer orders</p>
+            <button class="export-button"><i class="fas fa-download"></i> Export</button>
+            <div class="search-bar">
+                <input type="text" placeholder="Search orders...">
+            </div>
+            <div class="filters">
+                <select>
+                    <option>All Statuses</option>
+                </select>
+                <button class="add-product"><i class="fas fa-plus"></i> Add Order</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ORD-001</td>
+                        <td>Akua Agyeiwaa</td>
+                        <td>2023-10-15</td>
+                        <td>&#8373;599.95</td>
+                        <td><span class="status-delivered">Delivered</span></td>
+                        <td class="actions">
+                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ORD-002</td>
+                        <td>Efua Owusu</td>
+                        <td>2024-10-14</td>
+                        <td>&#8373;329.97</td>
+                        <td><span class="status-processing">Processing</span></td>
+                        <td class="actions">
+                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ORD-003</td>
+                        <td>Michael Agyemang</td>
+                        <td>2024-10-13</td>
+                        <td>&#8373;889.93</td>
+                        <td><span class="status-delivered">Delivered</span></td>
+                        <td>
+                            <i class="fas fa-eye icon"></i>
+                            <i class="fas fa-ellipsis-h icon"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ORD-004</td>
+                        <td>Samuel Asante</td>
+                        <td>2024-10-12</td>
+                        <td>&#8373;149.99</td>
+                        <td><span class="status-processing">Pending</span></td>
+                        <td>
+                            <i class="fas fa-eye icon"></i>
+                            <i class="fas fa-ellipsis-h icon"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ORD-005</td>
+                        <td>Daniel Ofori</td>
+                        <td>2024-10-11</td>
+                        <td>&#8373;1,299.00</td>
+                        <td><span class="status-delivered">Delivered</span></td>
+                        <td>
+                            <i class="fas fa-eye icon"></i>
+                            <i class="fas fa-ellipsis-h icon"></i>
+                        </td>
+                    </tr>
+            </table>
+            <div class="footer">Showing 5 of 5 orders</div>
+            <div class="pagination">
+                <button>Previous</button>
+                <button>Next</button>
+                </tbody>
+                </table>
+        </section>
+
+
+        <!-- Featured Products -->
+        <section class="featured-container content-1" data-id="f-products">
+            <h1>Featured Products</h1>
+            <p>Manage featured products to display on the front-end website</p>
+            <div class="form-group">
+                <div>
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" name="product-name">
+                </div>
+                <div>
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option>Select category</option>
+                        <option>Electronics</option>
+                        <option>Furniture</option>
+                        <option>Clothing</option>
+                        <option>Home & Kitchen</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div style="width: 100%;">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+            </div>
+
+            <div class="file-upload">
+                <label for="file-input">
+                    Choose File
+                </label>
+                <span id="file-name">
+                    No file chosen
+                </span>
+                <input id="file-input" type="file" accept="image/*" />
+            </div>
+            <button class="add-product-btn">
+                <i class="fas fa-plus">
+                </i>
+                Add Product
+            </button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-image">
+                                <img alt="Placeholder image for Wireless Earbuds" height="50"
+                                    src="https://i.postimg.cc/fygVcQyc/img1.jpg" width="50" />
+                            </div>
+                        </td>
+                        <td>Avocado
+                        </td>
+                        <td>
+                            <span class="category-badge">
+                                Fruit
+                            </span>
+                        </td>
+                        <td>
+                            Fresh and sweet Avocado
+                        </td>
+                        <td>
+                            <i class="fas fa-trash delete-icon">
+                            </i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-image">
+                                <img alt="Placeholder image for Ergonomic Chair" height="50"
+                                    src="https://i.postimg.cc/Pf6vsYyC/img6.jpg" width="50" />
+                            </div>
+                        </td>
+                        <td>
+                            Yam
+                        </td>
+                        <td>
+                            <span class="category-badge">
+                                Tubers
+                            </span>
+                        </td>
+                        <td>
+                            get sweet yam
+                        </td>
+                        <td>
+                            <i class="fas fa-trash delete-icon">
+                            </i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-image">
+                                <img alt="Placeholder image for Wireless Earbuds" height="50"
+                                    src="https://i.postimg.cc/MKvMWH3d/img4.jpg" width="50" />
+                            </div>
+                        </td>
+                        <td>
+                            Tomatoes
+                        </td>
+                        <td>
+                            <span class="category-badge">
+                                Vegetables
+                            </span>
+                        </td>
+                        <td>
+                            Fresh Tomatoes
+                        </td>
+                        <td>
+                            <i class="fas fa-trash delete-icon">
+                            </i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-image">
+                                <img alt="Placeholder image for Ergonomic Chair" height="50"
+                                    src="https://i.postimg.cc/DwGSXDTG/img2.jpg" width="50" />
+                            </div>
+                        </td>
+                        <td>
+                            Plantain
+                        </td>
+                        <td>
+                            <span class="category-badge">
+                                Fruits
+                            </span>
+                        </td>
+                        <td>
+                            Affordable and fresh plantains
+                        </td>
+                        <td>
+                            <i class="fas fa-trash delete-icon">
+                            </i>
+                        </td>
+                </tbody>
+                </tr>
+            </table>
+            <a class="send-button" href="#">
+                Send to Front-end
+            </a>
+
+        </section>
+
+
+        <section class="expense-container content-1" data-id="expense">
+            <h1>Add New Expense</h1>
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="date">Date</label>
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" id="date">
+                    </div>
+                </div>
+                <div class="half-width">
+                    <label for="category">Category</label>
+                    <div class="dropdown">
+                        <select id="category">
+                            <option>Select category</option>
+                            <option>Office Supplies</option>
+                            <option>Utilities</option>
+                            <option>Rent</option>
+                            <option>Salaries</option>
+                            <option>Marketing</option>
+                            <option>Travel</option>
+                            <option>Software</option>
+                        </select>
+                        <!-- <div class="dropdown-content">
+                            <a href="#">Office Supplies</a>
+                            <a href="#">Utilities</a>
+                            <a href="#">Rent</a>
+                            <a href="#">Salaries</a>
+                            <a href="#">Marketing</a>
+                            <a href="#">Travel</a>
+                            <a href="#">Software</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class=" half-width">
+                    <label for="description">Description</label>
+                    <input type="text" id="description">
+                </div>
+                <div class="half-width">
+                    <label for="amount">Amount</label>
+                    <input type="text" id="amount">
+                </div>
+            </div>
+            <button class="btn"><i class="fas fa-plus"></i> Add Expense</button>
+
+            <div class="filter-export">
+                <h1>Expense List</h1>
+                <select>
+                    <option>All Categories</option>
+                </select>
+                <button><i class="fas fa-download"></i> Export</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Oct 15, 2024</td>
+                        <td>Office Supplies</td>
+                        <td>Printer paper and ink</td>
+                        <td>&#8373;150.00</td>
+                        <td class="actions"><i class="fas fa-trash-alt"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Oct 16, 2024</td>
+                        <td>Utilities</td>
+                        <td>Electricity bill</td>
+                        <td>&#8373;500.00</td>
+                        <td class="actions"><i class="fas fa-trash-alt"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Oct 17, 2024</td>
+                        <td>Rent</td>
+                        <td>Office space rent</td>
+                        <td>&#8373;2000.00</td>
+                        <td class="actions"><i class="fas fa-trash-alt"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <!-- Logout Section -->
+        <div class="logout-container content-1" data-id="logout">
+            <h1>Logged Out Successfully</h1>
+            <p>You have been logged out of your account.</p>
+            <div class="button-container">
+                <a href="login.html" class="btn">Login Again</a>
+                <a href="index.html" class="btn">Go to Home</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
