@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
+
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.all.min.js"
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
@@ -22,14 +23,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
         integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <!-- jQuery is required for Toastr -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="script.js" defer></script>
     <title>DROMJOR VENTURES</title>
@@ -44,7 +45,7 @@
         <div class="nav-logo-m">
             <img src="logo.png" alt="Logo" width="110" height="90" />
         </div>
-    
+
         <div class="nav-toggle">
             <i class="fas fa-bars" id="open-nav"></i>
             <i class="fas fa-times" id="close-nav"></i>
@@ -108,10 +109,28 @@
         <div class="cart-header">
             <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
             <h2>My Cart</h2>
-            <p>Your cart is empty</p>
+            <p id="cart-status">Your cart is empty</p>
         </div>
         <!-- This will be the container for the cart items -->
-        <div class="cart-items"></div>
+        <div class="cart-items">
+        </div>
+
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Enter Amount</span>
+                <span>
+                    GH&#8373;
+                    <input type="number" id="amount" value="00.00" min="0" step="0.01">
+                </span>
+            </div>
+            <!-- <p>Shipping and taxes calculated at checkout.
+          <a href="#">View Cart</a>
+        </p> -->
+            <button>Checkout</button>
+            <p class="continue-shopping">or
+                <a href="#">Continue Shopping →</a>
+            </p>
+        </div>
     </div>
 
     <!-- Slider -->
@@ -227,7 +246,8 @@
                     <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
                 </div>
                 <div class="product" data-product-id="6">
-                    <img src="https://i.postimg.cc/G3q6PH47/Caption-under-weekend-vibesm-square-jpg.jpg" alt="Product 7">
+                    <img src="https://i.postimg.cc/G3q6PH47/Caption-under-weekend-vibesm-square-jpg.jpg"
+                        alt="Product 7">
                     <button class="add-to-cart">Add to cart</button>
                     <h2 class="product-name">Mango</h2>
                     <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
