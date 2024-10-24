@@ -1344,6 +1344,12 @@ Desktop Slider
   line-height: 4rem;
 }
 
+.text h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
 .image {
   width: 50%;
   padding-block: 2px;

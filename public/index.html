@@ -12,17 +12,6 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-  <!-- GSAP -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.all.min.js"
-    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-    integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-
   <!-- jQuery for Toastr -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Toastr CSS -->
@@ -104,33 +93,33 @@
   </nav>
 
   <!-- cart sidebar -->
-<div class="cart-sidebar">
-  <div class="cart-header">
-    <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
-    <h2>My Cart</h2>
-    <p id="cart-status">Your cart is empty</p>
-  </div>
-  <!-- This will be the container for the cart items -->
-  <div class="cart-items">
-  </div>
+  <div class="cart-sidebar">
+    <div class="cart-header">
+      <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
+      <h2>My Cart</h2>
+      <p id="cart-status">Your cart is empty</p>
+    </div>
+    <!-- This will be the container for the cart items -->
+    <div class="cart-items">
+    </div>
 
-  <div class="cart-footer">
-  <div class="subtotal">
-    <span>Enter Amount</span>
-    <span>
-      GH&#8373;
-      <input type="number" id="amount" value="00.00" min="0" step="0.01">
-    </span>
-  </div>
-    <!-- <p>Shipping and taxes calculated at checkout.
+    <div class="cart-footer">
+      <div class="subtotal">
+        <span>Enter Amount</span>
+        <span>
+          GH&#8373;
+          <input type="number" id="amount" value="00.00" min="0" step="0.01">
+        </span>
+      </div>
+      <!-- <p>Shipping and taxes calculated at checkout.
       <a href="#">View Cart</a>
     </p> -->
-    <button>Checkout</button>
-    <p class="continue-shopping">or
-      <a href="#">Continue Shopping →</a>
-    </p>
+      <button>Checkout</button>
+      <p class="continue-shopping">or
+        <a href="#">Continue Shopping →</a>
+      </p>
+    </div>
   </div>
-</div>
 
   <!-- Slider -->
   <div class="slider-container">
@@ -206,17 +195,15 @@
       <div class="row">
         <div class="text" data-aos="fade-down-right">
           <h2>Welcome to Domjor Ventures</h2>
-          <p>Welcome to Domjor Ventures
-            Welcome to Domjor Ventures, your premier partner in delivering fresh farm produce directly to your doorstep.
-            We are
+          <p>Welcome to Dromjor Ventures, your premier partner in delivering fresh farm produce directly to your
+            doorstep. We are
             committed to providing the highest quality fruits, vegetables, and other farm produce to our customers,
             ensuring that
             they receive the best possible produce at affordable prices. Our team of experts are dedicated to sourcing
             the freshest
             produce from local farms and delivering it to our customers in a timely and efficient manner, ensuring that
             they can
-            enjoy the best of nature's bounty in the comfort of their own homes.
-            <br>
+            enjoy the best of nature's bounty in the comfort of their homes.
             Count on us for a fresh "farmtastic" experience!
           </p>
         </div>
@@ -238,7 +225,8 @@
         <div class="product" data-product-id="1">
           <img src="https://i.postimg.cc/85zKR0qC/MIlo-Sachet-square-jpg.jpg" alt="Product 1">
           <h2 class="product-name">Milo Sachet</h2>
-          <button class="add-to-cart" data-image="https://i.postimg.cc/85zKR0qC/MIlo-Sachet-square-jpg.jpg" data-name="Milo Sachet" data-quantity="1" data-amount="10">Add to cart</button>
+          <button class="add-to-cart" data-image="https://i.postimg.cc/85zKR0qC/MIlo-Sachet-square-jpg.jpg"
+            data-name="Milo Sachet" data-quantity="1" data-amount="10">Add to cart</button>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
         <div class="product" data-product-id="2">
@@ -247,61 +235,61 @@
           <h2 class="product-name">Vegetable</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="2">
+        <div class="product" data-product-id="3">
           <img src="Images\img6.jpeg" alt="Product 3">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Yam</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="3">
+        <div class="product" data-product-id="4">
           <img src="Images\img7.jpeg" alt="Product 4">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Fruits</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="4">
+        <div class="product" data-product-id="5">
           <img src="Images\img3.jpeg" alt="Product 5">
           <button class="add-to-cart" id="count">Add to cart</button>
           <h2 class="product-name">Spices</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="5">
+        <div class="product" data-product-id="6">
           <img src="Images\img2.jpeg" alt="Product 6">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">plantains</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="6">
+        <div class="product" data-product-id="7">
           <img src="https://i.postimg.cc/G3q6PH47/Caption-under-weekend-vibesm-square-jpg.jpg" alt="Product 7">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Mango</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="7">
+        <div class="product" data-product-id="8">
           <img src="https://i.postimg.cc/tCJwBpPX/Cassava.jpg" alt="Product 8">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Cassava Dough</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="8">
+        <div class="product" data-product-id="9">
           <img src="https://i.postimg.cc/5y07KSXP/frozenstewbeef.jpg" alt="Product 9">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Frozen Beef</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="9">
+        <div class="product" data-product-id="10">
           <img src="https://i.postimg.cc/zvcdsHWq/rice.png" alt="Product 10">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Rice</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="10">
+        <div class="product" data-product-id="11">
           <img src="https://i.postimg.cc/597kYTrD/Snails.jpg" alt="Product 11">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Snail</h2>
           <!-- <button class="order-now"> <a href="order.html">Order Now</a></button> -->
         </div>
-        <div class="product" data-product-id="11">
+        <div class="product" data-product-id="12">
           <img src="https://i.postimg.cc/k5JxYKDD/Salted-fish.png" alt="Product 12">
           <button class="add-to-cart">Add to cart</button>
           <h2 class="product-name">Salted Fish</h2>
@@ -358,9 +346,200 @@
     </div>
   </footer>
 
-  <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};  // Load cart items from localStorage or initialize as empty object
+      const cartItemsContainer = document.querySelector('.cart-items');
+      const cartNotificationSpan = document.getElementById('count');
+      const cartStatus = document.getElementById('cart-status');
+
+      // Fetch featured products
+      fetch('/api/featured-products')
+        .then(response => response.json())
+        .then(products => {
+          const productsGrid = document.querySelector('.products-grid');
+          products.forEach(product => {
+            if (product.is_featured) {
+              const productElement = createProductElement(product);
+              productsGrid.appendChild(productElement);
+            }
+          });
+
+          // Add event listeners to all "Add to cart" buttons
+          const addToCartButtons = document.querySelectorAll('.add-to-cart');
+          addToCartButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+              const product = button.closest('.product');
+              const productId = product.dataset.productId;
+              const productName = product.querySelector('.product-name').textContent;
+              const productImage = product.querySelector('img').src;
+
+              // If product is already in cart, increase quantity
+              if (cartItems[productId]) {
+                cartItems[productId].quantity++;
+                updateCartItemDisplay(productId);
+              } else {
+                cartItems[productId] = {
+                  name: productName,
+                  image: productImage,
+                  quantity: 1
+                };
+                addNewCartItemToDisplay(productId);
+              }
+
+              // Update total count and cart status
+              updateTotalCount();
+              updateCartStatus();
+
+              // Save the cart items to localStorage
+              localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+              // Send cart data to the backend
+              sendCartItemToBackend(productId, productName, productImage, cartItems[productId].quantity);
+
+              // Toastr notification
+              toastr.success(
+                `
+                        <div style="display: flex; align-items: center;">
+                            <img src="${productImage}" alt="${productName}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 50%;">
+                            <span>${productName} has been added to your cart!</span>
+                        </div>
+                        `,
+                "Added to Cart",
+                {
+                  className: "toast-success animated",
+                }
+              );
+            });
+          });
+
+          // Load existing cart items from localStorage
+          loadCartItemsFromLocalStorage();
+        })
+        .catch(error => console.error('Error fetching featured products:', error));
+
+      function createProductElement(product) {
+        const productElement = document.createElement("div");
+        productElement.className = "product";
+        productElement.setAttribute("data-product-id", product.id);
+
+        const productImage = document.createElement("img");
+        productImage.src = product.image;
+        productImage.alt = product.product_name;
+        productElement.appendChild(productImage);
+
+        const addToCartButton = document.createElement("button");
+        addToCartButton.className = "add-to-cart";
+        addToCartButton.textContent = "Add to cart";
+        productElement.appendChild(addToCartButton);
+
+        const productName = document.createElement("h2");
+        productName.className = "product-name";
+        productName.textContent = product.product_name;
+        productElement.appendChild(productName);
+
+        return productElement;
+      }
+
+      function updateCartItemDisplay(productId) {
+        const cartItemElement = document.querySelector(`.cart-item[data-product-id="${productId}"]`);
+        if (cartItemElement) {
+          const quantityElement = cartItemElement.querySelector('.cart-item-quantity');
+          quantityElement.textContent = cartItems[productId].quantity;
+        }
+      }
+
+      function addNewCartItemToDisplay(productId) {
+        const productHTML = `
+            <div class="cart-item" data-product-id="${productId}">
+                <div class="cart-item-image-container">
+                    <img src="${cartItems[productId].image}" alt="${cartItems[productId].name}">
+                    <span class="cart-item-quantity">${cartItems[productId].quantity}</span>
+                </div>
+                <h2>${cartItems[productId].name}</h2>
+                <input type="number" class="cart-item-quantity-input" value="${cartItems[productId].quantity}" min="0" step="1">
+                <span class="remove-item">
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+            </div>
+        `;
+
+        const cartItem = document.createElement("div");
+        cartItem.innerHTML = productHTML;
+
+        cartItem.querySelector(".remove-item").addEventListener("click", () => {
+          cartItemsContainer.removeChild(cartItem);
+          delete cartItems[productId];  // Remove item from cart object
+          updateCartItemsCountAndTotal();
+
+          // Update localStorage after item removal
+          localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        });
+
+        cartItemsContainer.appendChild(cartItem);
+      }
+
+      function updateTotalCount() {
+        const totalCount = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+        cartNotificationSpan.textContent = totalCount;
+      }
+
+      function updateCartStatus() {
+        if (cartItemsContainer.children.length > 0) {
+          cartStatus.textContent = 'You have items in your cart';
+        } else {
+          cartStatus.textContent = 'Your cart is empty';
+        }
+      }
+
+      function updateCartItemsCountAndTotal() {
+        updateTotalCount();
+        updateCartStatus();
+      }
+
+      // Load cart items from localStorage
+      function loadCartItemsFromLocalStorage() {
+        Object.keys(cartItems).forEach(productId => {
+          addNewCartItemToDisplay(productId);
+        });
+        updateTotalCount();
+        updateCartStatus();
+      }
+
+      // Function to send cart data to the backend
+      function sendCartItemToBackend(productId, productName, productImage, quantity) {
+        const cartData = {
+          name: productName,
+          image: productImage,
+          quantity: quantity,
+          amount: 19.99 // Placeholder amount; 
+        };
+
+        fetch('/api/add-to-cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(cartData)
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              toastr.error('Failed to save cart item');
+              console.error('Error:', data.error);
+            } else {
+              console.log('Cart item saved successfully');
+            }
+          })
+          .catch(error => {
+            console.error('Error saving cart item');
+            console.error('Error:', error);
+          });
+      }
+    });
+
+
+  </script>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>

@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="/Dashboard/dashboard.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="dashboard.js" defer></script>
-    <title>Document</title>
+    <script src="/Dashboard/dashboard.js" defer></script>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -365,10 +365,10 @@
                     <label for="category">Category</label>
                     <select id="category" name="category">
                         <option>Select category</option>
-                        <option>Electronics</option>
-                        <option>Furniture</option>
-                        <option>Clothing</option>
-                        <option>Home & Kitchen</option>
+                        <option>Fresh Produce</option>
+                        <option>Dairy Products</option>
+                        <option>Meat and Seafood</option>
+                        <option>Others</option>
                     </select>
                 </div>
             </div>
@@ -388,12 +388,17 @@
                 </span>
                 <input id="file-input" type="file" accept="image/*" />
             </div>
-            <button class="add-product-btn">
-                <i class="fas fa-plus">
-                </i>
-                Add Product
-            </button>
-            <table>
+            <div class="add-to-cart-container">
+                <button class="add-product-btn">
+                    <i class="fas fa-plus"></i>
+                    Add to Product
+                </button>
+                <label class="is-featured-label">
+                    <input type="checkbox" class="is-featured-checkbox">
+                    Is Featured
+                </label>
+            </div>
+            <table id="featuredProductsTable">
                 <thead>
                     <tr>
                         <th>
@@ -507,10 +512,9 @@
                 </tbody>
                 </tr>
             </table>
-            <a class="send-button" href="#">
+            <!-- <a class="send-button" href="#">
                 Send to Front-end
-            </a>
-
+            </a> -->
         </section>
 
 

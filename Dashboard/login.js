@@ -1,15 +1,13 @@
 document
   .getElementById("loginForm")
   .addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the form from submitting the default way
+    event.preventDefault();
 
-    // Get form values
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     try {
-      // Send POST request to login endpoint
-      const response = await fetch("/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -20,10 +18,9 @@ document
       const data = await response.json();
 
       if (response.ok) {
-        // Redirect to dashboard if login is successful
+        alert("Login successful!");
         window.location.href = "/dashboard";
       } else {
-        // Display error message if login fails
         alert(data.error || "Invalid login credentials. Please try again.");
       }
     } catch (error) {

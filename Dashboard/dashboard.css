@@ -1,6 +1,5 @@
 * {
 
-
     scroll-behavior: smooth;
     box-sizing: border-box;
     margin: 0;
@@ -242,156 +241,156 @@ body {
 
 /* Tablet Media Query (768px - 1024px) */
 @media only screen and (max-width: 1024px) {
-  .log-header {
-    padding: 10px;
-  }
-  
-  .log-header h1 {
-    font-size: 2rem;
-    padding-right: 20px;
-  }
-  
-  .home {
-    margin-top: 150px;
-  }
-  
-  .log-container {
-    width: 70vw;
-    height: 70%;
-    margin-top: 30px;
-    margin-left: 20px;
-  }
-  
-  .left {
-    padding: 15px;
-  }
-  
-  .left h1 {
-    margin-bottom: 15px;
-  }
-  
-  .left h2 {
-    margin-bottom: 8px;
-  }
-  
-  .left form {
-    max-width: 250px;
-  }
-  
-  .left form input {
-    padding: 8px;
-    margin: 8px 0;
-  }
-  
-  .left form .btn {
-    padding: 8px;
-  }
-  
-  .right img {
-    width: 70%;
-  }
+    .log-header {
+        padding: 10px;
+    }
+
+    .log-header h1 {
+        font-size: 2rem;
+        padding-right: 20px;
+    }
+
+    .home {
+        margin-top: 150px;
+    }
+
+    .log-container {
+        width: 70vw;
+        height: 70%;
+        margin-top: 30px;
+        margin-left: 20px;
+    }
+
+    .left {
+        padding: 15px;
+    }
+
+    .left h1 {
+        margin-bottom: 15px;
+    }
+
+    .left h2 {
+        margin-bottom: 8px;
+    }
+
+    .left form {
+        max-width: 250px;
+    }
+
+    .left form input {
+        padding: 8px;
+        margin: 8px 0;
+    }
+
+    .left form .btn {
+        padding: 8px;
+    }
+
+    .right img {
+        width: 70%;
+    }
 }
 
 /* Mobile Media Query (480px - 768px) */
 @media only screen and (max-width: 768px) {
-  .log-header {
-    padding: 5px;
-  }
-  
-  .log-header h1 {
-    font-size: 1.5rem;
-    padding-right: 15px;
-  }
-  
-  .home {
-    margin-top: 100px;
-  }
-  
-  .log-container {
-    width: 80vw;
-    height: 60%;
-    margin-top: 20px;
-    margin-left: 10px;
-    flex-direction: column;
-  }
-  
-  .left {
-    padding: 10px;
-    flex: 1;
-  }
-  
-  .left h1 {
-    margin-bottom: 10px;
-  }
-  
-  .left h2 {
-    margin-bottom: 5px;
-  }
-  
-  .left form {
-    max-width: 200px;
-  }
-  
-  .left form input {
-    padding: 5px;
-    margin: 5px 0;
-  }
-  
-  .left form .btn {
-    padding: 5px;
-  }
-  
-  .right {
-    display: none;
-  }
+    .log-header {
+        padding: 5px;
+    }
+
+    .log-header h1 {
+        font-size: 1.5rem;
+        padding-right: 15px;
+    }
+
+    .home {
+        margin-top: 100px;
+    }
+
+    .log-container {
+        width: 80vw;
+        height: 60%;
+        margin-top: 20px;
+        margin-left: 10px;
+        flex-direction: column;
+    }
+
+    .left {
+        padding: 10px;
+        flex: 1;
+    }
+
+    .left h1 {
+        margin-bottom: 10px;
+    }
+
+    .left h2 {
+        margin-bottom: 5px;
+    }
+
+    .left form {
+        max-width: 200px;
+    }
+
+    .left form input {
+        padding: 5px;
+        margin: 5px 0;
+    }
+
+    .left form .btn {
+        padding: 5px;
+    }
+
+    .right {
+        display: none;
+    }
 }
 
 /* Mobile Media Query (320px - 480px) */
 @media only screen and (max-width: 480px) {
-  .log-header {
-    padding: 3px;
-  }
-  
-  .log-header h1 {
-    font-size: 1rem;
-    padding-right: 10px;
-  }
-  
-  .home {
-    margin-top: 80px;
-  }
-  
-  .log-container {
-    width: 90vw;
-    height: 50%;
-    margin-top: 15px;
-    margin-left: 5px;
-  }
-  
-  .left {
-    padding: 5px;
-  }
-  
-  .left h1 {
-    margin-bottom: 5px;
-  }
-  
-  .left h2 {
-    margin-bottom: 3px;
-  }
-  
-  .left form {
-    max-width: 150px;
-  }
-  
-  .left form input {
-    padding: 3px;
-    margin: 3px 0;
-  }
-  
-  .left form .btn {
-    padding: 3px;
-  }
+    .log-header {
+        padding: 3px;
+    }
+
+    .log-header h1 {
+        font-size: 1rem;
+        padding-right: 10px;
+    }
+
+    .home {
+        margin-top: 80px;
+    }
+
+    .log-container {
+        width: 90vw;
+        height: 50%;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+
+    .left {
+        padding: 5px;
+    }
+
+    .left h1 {
+        margin-bottom: 5px;
+    }
+
+    .left h2 {
+        margin-bottom: 3px;
+    }
+
+    .left form {
+        max-width: 150px;
+    }
+
+    .left form input {
+        padding: 3px;
+        margin: 3px 0;
+    }
+
+    .left form .btn {
+        padding: 3px;
+    }
 }
 
 
@@ -1102,6 +1101,13 @@ p {
     margin-left: 10px;
 }
 
+.add-to-cart-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 .add-product-btn {
     background-color: #000;
     color: #fff;
@@ -1111,6 +1117,18 @@ p {
     cursor: pointer;
     display: inline-block;
     margin-bottom: 20px;
+}
+
+.is-featured-label {
+    margin-left: 10px;
+    color: #fdfdfd;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.is-featured-checkbox {
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 table {
@@ -1133,7 +1151,7 @@ td {
 }
 
 .delete-icon {
-    color: #333;
+    color: #a81c1c;
     cursor: pointer;
 }
 
@@ -1247,6 +1265,7 @@ label {
     top: 50%;
     transform: translateY(-50%);
     color: #000;
+    cursor: pointer;
 }
 
 input[type="text"],
