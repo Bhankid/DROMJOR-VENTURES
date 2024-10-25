@@ -126,16 +126,82 @@ document.addEventListener("DOMContentLoaded", function () {
   if (featuredProductsTable) {
     featuredProductsTable.addEventListener("click", function (e) {
       if (e.target && e.target.classList.contains("delete-icon")) {
-        // Get the parent row of the clicked delete icon
         const row = e.target.closest("tr");
         const productId = row.dataset.productId;
 
-        // Remove the row from the table
-        row.remove();
+        if (confirm("Are you sure you want to delete this product?")) {
+          // Remove from the table
+          row.remove();
+
+          // Remove from localStorage
+          let products =
+            JSON.parse(localStorage.getItem("featuredProducts")) || [];
+          products = products.filter(
+            (product) => product.productId !== productId
+          );
+          localStorage.setItem("featuredProducts", JSON.stringify(products));
+
+          // Call the API to delete the product
+          fetch(`/api/delete-featured-product/${productId}`, {
+            method: "DELETE",
+          })
+            .then(async (response) => {
+              const contentType = response.headers.get("content-type");
+              if (
+                contentType &&
+                contentType.indexOf("application/json") !== -1
+              ) {
+                // Response is JSON
+                return response.json().then((data) => {
+                  if (!response.ok)
+                    throw new Error(data.error || "Failed to delete product");
+                  return data;
+                });
+              } else {
+                // **Add Debugging:** Response is not JSON, log it for further investigation
+                const text = await response.text();
+                console.error("Non-JSON response received:", text);
+                throw new Error(
+                  `Received non-JSON response: ${text.substring(0, 100)}...`
+                );
+              }
+            })
+            .then((data) => {
+              alert(data.message);
+            })
+            .catch((err) => {
+              console.error("Error deleting product:", err);
+              alert(
+                `Failed to delete product. Please try again.\nError: ${err.message}`
+              );
+            });
+        }
       }
     });
   }
 });
+
+// New function to save featured products to localStorage
+function saveFeaturedProductsToLocalStorage(product) {
+  let products = JSON.parse(localStorage.getItem("featuredProducts")) || [];
+  products.push(product);
+  localStorage.setItem("featuredProducts", JSON.stringify(products));
+}
+
+//  function to load featured products from localStorage
+function loadFeaturedProductsFromLocalStorage() {
+  const products = JSON.parse(localStorage.getItem("featuredProducts")) || [];
+  products.forEach((product) => {
+    addProductToTable(
+      product.name,
+      product.category,
+      product.description,
+      product.imagePath,
+      product.productId,
+      product.isFeatured
+    );
+  });
+}
 
 // Wait for the DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
@@ -151,6 +217,9 @@ document.addEventListener("DOMContentLoaded", function () {
     "featuredProductsTable"
   );
   const fileNameSpan = document.getElementById("file-name");
+
+  // Load featured products from localStorage
+  loadFeaturedProductsFromLocalStorage();
 
   // Add click event listener to the "Add Product" button
   addProductBtn.addEventListener("click", function () {
@@ -168,47 +237,58 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create FormData object for sending to server
     const formData = new FormData();
     formData.append("productId", productId);
-    formData.append("productName", name);
-    formData.append("category", cat);
-    formData.append("description", desc);
-    formData.append("isFeatured", isFeatured);
-    if (file) {
-      formData.append("image", file);
-    }
+    formData.append("productName", name); // Add product name
+    formData.append("category", cat); // Add category
+    formData.append("description", desc); // Add description
+    formData.append("image", file); // Add image file
+    formData.append("isFeatured", isFeatured); // Add isFeatured flag
 
-    // Send data to server
+    // Send the form data to the server
     fetch("/api/add-featured-product", {
       method: "POST",
       body: formData,
     })
-      .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            try {
-              return JSON.parse(text);
-            } catch (e) {
-              throw new Error("Server returned non-JSON response: " + text);
-            }
+      .then(async (response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          // Response is JSON
+          return response.json().then((data) => {
+            if (!response.ok)
+              throw new Error(data.error || "Failed to add product");
+            return data;
           });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.error) {
+        } else {
+          // **Add Debugging:** Response is not JSON, log it for further investigation
+          const text = await response.text();
+          console.error("Non-JSON response received:", text);
           throw new Error(
-            data.error + (data.details ? ": " + data.details : "")
+            `Received non-JSON response: ${text.substring(0, 100)}...`
           );
         }
-        alert("Product added successfully!");
+      })
+      .then((data) => {
+        alert(data.message);
+
+        // Add the product to the table
         addProductToTable(
           name,
           cat,
           desc,
           data.imagePath,
           productId,
-          isFeatured,
           isFeatured
         );
+
+        // Save to localStorage
+        saveFeaturedProductsToLocalStorage({
+          name,
+          category: cat,
+          description: desc,
+          imagePath: data.imagePath,
+          productId,
+          isFeatured,
+        });
+
         clearForm();
       })
       .catch((err) => {
@@ -220,58 +300,41 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       });
   });
-
-  // Add event listener to file input
-  fileInput.addEventListener("change", function () {
-    if (this.files[0]) {
-      fileNameSpan.textContent = this.files[0].name;
-    } else {
-      fileNameSpan.textContent = "No file chosen";
-    }
-  });
-
-  // Function to add product to table
-  function addProductToTable(
-    name,
-    category,
-    description,
-    imagePath,
-    productId
-  ) {
-    const newRow = `
-      <tr data-product-id="${productId}">
-        <td>
-          <div class="product-image">
-            <img alt="Product image for ${name}" height="50" width="50" src="${imagePath}" />
-          </div>
-        </td>
-        <td>${name}</td>
-        <td>
-          <span class="category-badge">
-            ${category}
-          </span>
-        </td>
-         <td>${description}</td>
-        <td>
-          <i class="fas fa-trash delete-icon"></i>
-        </td>
-      </tr>
-    `;
-    document
-      .querySelector("#featuredProductsTable tbody")
-      .insertAdjacentHTML("beforeend", newRow);
-  }
-
-  // Function to clear the form
-  function clearForm() {
-    productName.value = "";
-    category.value = "";
-    description.value = "";
-    fileInput.value = "";
-    isFeaturedCheckbox.checked = false;
-    fileNameSpan.textContent = "No file chosen";
-  }
 });
+
+// Function to add a product to the table
+function addProductToTable(name, category, description, imagePath, productId) {
+  const newRow = `
+    <tr data-product-id="${productId}">
+      <td>
+        <div class="product-image">
+          <img alt="Product image for ${name}" height="50" width="50" src="${imagePath}" />
+        </div>
+      </td>
+      <td>${name}</td>
+      <td>
+        <span class="category-badge">
+          ${category}
+        </span>
+      </td>
+      <td>${description}</td>
+      <td>
+        <i class="fas fa-trash delete-icon"></i>
+      </td>
+    </tr>
+  `;
+  featuredProductsTable.tBodies[0].insertAdjacentHTML("beforeend", newRow);
+}
+
+// Function to clear the form
+function clearForm() {
+  productName.value = "";
+  category.value = "";
+  description.value = "";
+  fileInput.value = "";
+  isFeaturedCheckbox.checked = false;
+  fileNameSpan.textContent = "No file chosen";
+}
 
 // Add Expense
 document.addEventListener("DOMContentLoaded", function () {

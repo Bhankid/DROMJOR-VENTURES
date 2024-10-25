@@ -92,7 +92,8 @@ const upload = multer({ storage: storage });
 // Featured Products route
 app.post("/api/add-featured-product", upload.single("image"), (req, res) => {
   try {
-    const { productName, category, description, productId, isFeatured } = req.body;
+    const { productName, category, description, productId, isFeatured } =
+      req.body;
     const imagePath = req.file
       ? `/Dashboard/uploads/${req.file.filename}`
       : null;
@@ -163,7 +164,7 @@ app.post("/api/add-featured-product", upload.single("image"), (req, res) => {
 
 // Get featured products to front end
 app.get("/api/featured-products", (req, res) => {
- const query = `
+  const query = `
     SELECT * FROM featured_products 
     WHERE is_featured = 1 
     OR category IS NOT NULL
@@ -180,6 +181,36 @@ app.get("/api/featured-products", (req, res) => {
   });
 });
 
+// Endpoint for featured product deletion
+app.delete("/api/delete-featured-product/:id", (req, res) => {
+  const productId = req.params.id;
+
+  // SQL query to delete the product
+  const query = "DELETE FROM featured_products WHERE product_id = ?";
+
+  db.query(query, [productId], (err, result) => {
+    if (err) {
+      console.error("Error deleting product:", err);
+      return res
+        .status(500)
+        .json({ error: "Failed to delete product", details: err.message });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted successfully" });
+  });
+});
+
+// Catch-all error handler to ensure all errors return JSON
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res
+    .status(500)
+    .json({ error: "Something went wrong!", details: err.message });
+});
 
 //Cart
 
@@ -203,23 +234,22 @@ app.post("/api/add-to-cart", (req, res) => {
     db.query(query, values, (err, result) => {
       if (err) {
         console.error("Error adding item to cart:", err);
-        return res.status(500).json({ 
-          error: "Failed to add item to cart", 
-          details: err.message 
+        return res.status(500).json({
+          error: "Failed to add item to cart",
+          details: err.message,
         });
       }
 
       res.status(201).json({
         message: "Item added to cart successfully",
-        cartItemId: result.insertId
+        cartItemId: result.insertId,
       });
     });
-
   } catch (error) {
     console.error("Unexpected error:", error);
-    res.status(500).json({ 
-      error: "An unexpected error occurred", 
-      details: error.message 
+    res.status(500).json({
+      error: "An unexpected error occurred",
+      details: error.message,
     });
   }
 });

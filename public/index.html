@@ -468,11 +468,27 @@
         cartItem.innerHTML = productHTML;
 
         cartItem.querySelector(".remove-item").addEventListener("click", () => {
-          cartItemsContainer.removeChild(cartItem);
-          delete cartItems[productId];  // Remove item from cart object
+          // Check the current quantity
+          if (cartItems[productId].quantity > 1) {
+            // Decrement the quantity
+            cartItems[productId].quantity -= 1;
+
+            // Update the displayed quantity in both the span and the input
+            const quantitySpan = cartItem.querySelector(".cart-item-quantity");
+            const quantityInput = cartItem.querySelector(".cart-item-quantity-input");
+
+            // Update the displayed quantity
+            quantitySpan.textContent = cartItems[productId].quantity;
+            quantityInput.value = cartItems[productId].quantity;
+          } else {
+            // Remove item from cart object if quantity is 1
+            cartItemsContainer.removeChild(cartItem);
+            delete cartItems[productId];
+          }
+
           updateCartItemsCountAndTotal();
 
-          // Update localStorage after item removal
+          // Update localStorage after item removal or quantity decrement
           localStorage.setItem('cartItems', JSON.stringify(cartItems));
         });
 
@@ -512,7 +528,7 @@
           name: productName,
           image: productImage,
           quantity: quantity,
-          amount: 19.99 // Placeholder amount; 
+          amount: 199.99 // Placeholder amount; 
         };
 
         fetch('/api/add-to-cart', {
