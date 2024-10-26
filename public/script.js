@@ -17,6 +17,12 @@ document.addEventListener("click", function (event) {
   }
 });
 
+document.getElementById("search-icon").addEventListener("click", function () {
+  const searchBar = document.getElementById("search-bar");
+  searchBar.classList.toggle("active"); 
+  searchBar.focus(); 
+});
+
 
 
 let currentSlide = 0;

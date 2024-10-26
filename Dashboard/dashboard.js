@@ -54,12 +54,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const statusSelects = document.querySelectorAll("select.status-select");
 
   function updateSelectStyle(select) {
+    // Remove all classes first to ensure only one is applied
+    select.classList.remove("paid", "pending", "partially");
+
     if (select.value === "paid") {
-      select.classList.remove("pending");
       select.classList.add("paid");
     } else if (select.value === "pending") {
-      select.classList.remove("paid");
       select.classList.add("pending");
+    } else if (select.value === "part") {
+      select.classList.add("partially");
     }
   }
 
@@ -72,6 +75,44 @@ document.addEventListener("DOMContentLoaded", function () {
       updateSelectStyle(select);
     });
   });
+});
+
+
+// Add category pop up
+document.addEventListener("DOMContentLoaded", () => {
+  const popupMenu = document.getElementById("popupMenu");
+  const addCategoryBtn = document.getElementById("addCategoryBtn");
+  const closePopup = document.getElementById("closePopup");
+  const submitBtn = document.getElementById("submitBtn");
+
+  // Show the popup when the button is clicked
+  addCategoryBtn.onclick = function () {
+    popupMenu.style.display = "block";
+  };
+
+  // Close the popup when the close button is clicked
+  closePopup.onclick = function () {
+    popupMenu.style.display = "none";
+  };
+
+  // Close the popup when clicking outside of the popup content
+  window.onclick = function (event) {
+    if (event.target === popupMenu) {
+      popupMenu.style.display = "none";
+    }
+  };
+
+  // Handle the submit button click
+  submitBtn.onclick = function () {
+    const name = document.getElementById("name").value;
+    const lastUpdated = document.getElementById("lastUpdated").value;
+
+    // You can process the input values here
+    console.log(`Name: ${name}, Last Updated: ${lastUpdated}`);
+
+    // Optionally, close the popup after submission
+    popupMenu.style.display = "none";
+  };
 });
 
 const fileInput = document.getElementById("file-input");

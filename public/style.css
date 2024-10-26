@@ -197,7 +197,8 @@ body {
 .btn-order {
   background-color: hsl(119, 100%, 29%);
   color: #ffffff;
-  padding: 5px 15px;
+  padding: 5px 18px;
+  margin-bottom: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -209,7 +210,8 @@ body {
 }
 
 .btn-order:hover {
-  background-color: hsl(122, 54%, 27%);
+  background-color: transparent;
+  outline: 1px solid hsl(119, 100%, 29%);
 }
 
 .btn-order i {
@@ -430,6 +432,35 @@ button.search-icon {
 button.search-icon i {
   font-size: 16px;
   color: #ffffff;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.search-bar {
+  display: none;
+  /* Initially hidden */
+  width: 45vw;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  position: absolute;
+  left: -400px;
+  top: 60px;
+  margin: 0 auto;
+  transition: all 0.4s ease;
+}
+
+.search-bar.active {
+  display: block;
 }
 
 /* .search-bar button.search-icon:hover {
@@ -1372,6 +1403,18 @@ Desktop Slider
     margin-top: 40px;
   }
 
+  .text {
+    width: 50%;
+    padding-block: 2px;
+    line-height: 3rem;
+  }
+
+  .text h2 {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
   .text,
   .image {
     width: 100%;
@@ -1383,6 +1426,18 @@ Desktop Slider
     margin-bottom: 0 !important;
     margin-top: 45px;
     padding-top: 100px;
+  }
+
+  .text {
+    width: 50%;
+    padding-block: 2px;
+    line-height: 2rem;
+  }
+
+  .text h2 {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
   }
 
   .products {

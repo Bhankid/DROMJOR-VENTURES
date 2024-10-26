@@ -57,14 +57,17 @@
             <li><a href="#contact" class="nav-link">Contact</a></li>
             <li>
                 <a href="tel:+2335948155987" class="btn-order">
-                    <i class="fas fa-phone"></i> Call 05948155987 <br> to Order
+                    <i class='bx bxs-phone-call bx-tada'></i>to order<br> 05948155987
                 </a>
             </li>
         </ul>
         <span class="cont">
-            <button class="search-icon">
-                <i class="fas fa-search"></i>
-            </button>
+            <div class="search-container">
+                <button class="search-icon" id="search-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+                <input type="text" class="search-bar" id="search-bar" placeholder="Search...">
+            </div>
             <ul>
                 <li class="cart-item">
                     <i class="fa-solid fa-cart-shopping cart-icon" id="cart-icon"></i>
@@ -74,42 +77,42 @@
         </span>
     </nav>
 
- 
+
     <!-- Contact -->
-     <div class="container-all">
-    <section class="contact-form" id="contact" data-aos="flip-left">
-        <div class="container-f">
-            <h2>Get in Touch</h2>
-            <p>Leave us a message and we'll get back to you soon!</p>
-            <form>
-                <div class="form-group">
-                    <input type="text" id="name" placeholder="Your Name">
-                    <label for="name">Your Name</label>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="Your Email">
-                    <label for="email">Your Email</label>
-                </div>
-                <div class="form-group">
-                    <input type="tel" id="phone" placeholder="Your Phone Number">
-                    <label for="phone">Your Phone Number</label>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" placeholder="Your Message"></textarea>
-                    <label for="message">Your Message</label>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
+    <div class="container-all">
+        <section class="contact-form" id="contact" data-aos="flip-left">
+            <div class="container-f">
+                <h2>Get in Touch</h2>
+                <p>Leave us a message and we'll get back to you soon!</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name">
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email">
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" placeholder="Your Phone Number">
+                        <label for="phone">Your Phone Number</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message"></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+        <div class="map" data-aos="flip-right">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31769.016895910332!2d-0.27625050972675075!3d5.54816605886648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf97711b12b299%3A0xffd4d7dd05fb27f1!2sDansoman%2C%20Accra!5e0!3m2!1sen!2sgh!4v1728486288965!5m2!1sen!2sgh"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-    </section>
-    <div class="map" data-aos="flip-right">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31769.016895910332!2d-0.27625050972675075!3d5.54816605886648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf97711b12b299%3A0xffd4d7dd05fb27f1!2sDansoman%2C%20Accra!5e0!3m2!1sen!2sgh!4v1728486288965!5m2!1sen!2sgh"
-            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    </div>
-    
+
     <!-- footer -->
     <footer>
         <div class="container">

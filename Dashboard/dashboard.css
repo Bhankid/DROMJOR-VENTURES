@@ -124,10 +124,100 @@ body {
 .home {
     max-width: 95vw;
     margin: 0 auto;
-    height: 90vh;
+    height: 100vh;
     overflow: hidden;
     margin-top: 200px;
     background-color: hsl(0, 18%, 86%);
+}
+
+.dash-container {
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.header {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: hsla(183, 86%, 60%, 0.477);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    width: 22%;
+    vertical-align: top;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card i {
+    font-size: 24px;
+    float: right;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.card .value {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.card .change {
+    color: green;
+    font-size: 14px;
+}
+
+.recent-activity {
+    background-color: hsla(183, 86%, 60%, 0.477);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.recent-activity p {
+    font-size: 14px;
+    color: #666;
+}
+
+.activity-item {
+    margin: 10px 0;
+}
+
+.activity-item i {
+    font-size: 24px;
+    float: left;
+    margin-right: 10px;
+}
+
+.activity-item .description {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.activity-item .time {
+    font-size: 14px;
+    color: #666;
+}
+
+.activity-item .amount {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+    float: right;
 }
 
 .log-container {
@@ -524,6 +614,10 @@ body {
     background-color: #34C759;
 }
 
+.status-select.partially {
+    background-color: hsla(60, 74%, 54%, 0.879);
+}
+
 .status-select.pending {
     background-color: #FF3737;
 }
@@ -816,6 +910,19 @@ body {
     border-bottom: 1px solid #dcb42f;
 }
 
+.actions-1 {
+    background-color: transparent;
+}
+
+.actions-1 i {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.actions-1 i.fa-trash {
+    color: red;
+}
+
 
 /* Categories */
 
@@ -876,6 +983,80 @@ td {
 
 .actions i.fa-trash {
     color: red;
+}
+
+.popup {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50vw;
+}
+
+.close {
+    color: #9a9898;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #cecccc;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: #17f65d;
+    outline: none;
+    box-shadow: 0 0 5px hsl(183, 50%, 28%);
+}
+
+#submitBtn {
+    background-color: hsl(183, 50%, 28%);
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.3rem;
+    border: none;
+}
+
+#submitBtn:hover {
+    background-color: hsla(183, 77%, 34%, 0.808);
 }
 
 
