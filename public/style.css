@@ -1404,13 +1404,11 @@ Desktop Slider
   }
 
   .text {
-    width: 50%;
-    padding-block: 2px;
     line-height: 3rem;
   }
 
   .text h2 {
-    text-align: center;
+    text-align: justify;
     font-size: 1.3rem;
     margin-bottom: 10px;
   }
@@ -1429,8 +1427,6 @@ Desktop Slider
   }
 
   .text {
-    width: 50%;
-    padding-block: 2px;
     line-height: 2rem;
   }
 

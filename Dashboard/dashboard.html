@@ -71,13 +71,13 @@
                     <p>Your latest transactions and events</p>
                     <div class="activity-item">
                         <i class="fas fa-dollar-sign"></i>
-                        <div class="description">New sale: Laptop</div>
+                        <div class="description">New sale: Rice</div>
                         <div class="time">2 minutes ago</div>
-                        <div class="amount">+$999</div>
+                        <div class="amount">+&#8373;999</div>
                     </div>
                     <div class="activity-item">
                         <i class="fas fa-user"></i>
-                        <div class="description">New customer: Jane Doe</div>
+                        <div class="description">New customer: Alfred Jessey</div>
                         <div class="time">5 minutes ago</div>
                     </div>
                 </div>
@@ -169,13 +169,46 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><strong>Total</strong></td>
+                        <td colspan="5"><strong>Total</strong></td>
                         <td><strong>&#8373;846.85</strong></td>
                         <td colspan="3"></td>
                     </tr>
                 </tbody>
             </table>
         </section>
+        <!-- Modal for creating invoice -->
+        <div class="modal" id="invoiceModal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Create Invoice</h2>
+                <form id="invoiceForm">
+                    <label for="invoiceId">Invoice ID:</label>
+                    <input type="text" id="invoiceId" name="invoiceId" required>
+
+                    <label for="customer">Customer:</label>
+                    <input type="text" id="customer" name="customer" required>
+
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+
+                    <label for="paymentStatus">Payment Status:</label>
+                    <select id="paymentStatus" name="paymentStatus">
+                        <option value="paid">Paid</option>
+                        <option value="part">Partially</option>
+                        <option value="pending">Unpaid</option>
+                    </select>
+
+                    <label for="orderStatus">Order Status:</label>
+                    <select id="orderStatus" name="orderStatus">
+                        <option value="delivered">Delivered</option>
+                        <option value="processing">Processing</option>
+                        <option value="pending">Pending</option>
+                    </select>
+
+                    <button class="gen" type="submit">Generate</button>
+                </form>
+            </div>
+        </div>
 
         <!-- Products -->
         <section class="content-1" data-id="products">
@@ -570,43 +603,22 @@
             </a> -->
         </section>
 
-
+        <!-- Expense Section -->
         <section class="expense-container content-1" data-id="expense">
-            <h1>Add New Expense</h1>
+            <h1 class="exp">Add New Expense</h1>
             <div class="form-group">
                 <div class="half-width">
-                    <label for="date">Date</label>
+                    <!-- <label for="date">Date</label>
                     <div class="input-group">
                         <i class="fas fa-calendar-alt"></i>
                         <input type="date" id="date">
-                    </div>
+                    </div> -->
                 </div>
-                <div class="half-width">
-                    <label for="category">Category</label>
-                    <div class="dropdown">
-                        <select id="category">
-                            <option>Select category</option>
-                            <option>Office Supplies</option>
-                            <option>Utilities</option>
-                            <option>Rent</option>
-                            <option>Salaries</option>
-                            <option>Marketing</option>
-                            <option>Travel</option>
-                            <option>Software</option>
-                        </select>
-                        <!-- <div class="dropdown-content">
-                            <a href="#">Office Supplies</a>
-                            <a href="#">Utilities</a>
-                            <a href="#">Rent</a>
-                            <a href="#">Salaries</a>
-                            <a href="#">Marketing</a>
-                            <a href="#">Travel</a>
-                            <a href="#">Software</a>
-                        </div> -->
-                    </div>
-                </div>
+                <!-- <div class="half-width">
+                    
+                </div> -->
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class=" half-width">
                     <label for="description">Description</label>
                     <input type="text" id="description">
@@ -615,8 +627,8 @@
                     <label for="amount">Amount</label>
                     <input type="text" id="amount">
                 </div>
-            </div>
-            <button class="btn"><i class="fas fa-plus"></i> Add Expense</button>
+            </div> -->
+            <button class="btn" id="addExpenseButton"><i class="fas fa-plus"></i> Add Expense</button>
 
             <div class="filter-export">
                 <h1>Expense List</h1>
@@ -660,6 +672,23 @@
                 </tbody>
             </table>
         </section>
+
+        <!-- Modal Popup -->
+        <div id="expenseModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Add New Expense</h2>
+                <label for="modalDate">Date</label>
+                <input type="date" id="modalDate">
+                <label for="modalCategory">Category</label>
+                <input type="text" id="modalCategory">
+                <label for="modalDescription">Description</label>
+                <input type="text" id="modalDescription">
+                <label for="modalAmount">Amount</label>
+                <input type="number" id="modalAmount">
+                <button class="btn" id="submitExpense"><i class="fas fa-plus"></i>Add</button>
+            </div>
+        </div>
 
 
         <!-- Logout Section -->

@@ -77,6 +77,37 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Invoice Pop Up
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("invoiceModal");
+  const btn = document.querySelector('[data-id="invoice"] .btn'); // Select the button within the section
+  const span = document.getElementById("closeModal");
+
+  // Open the modal when the button is clicked
+  btn.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  // Close the modal when the close button is clicked
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // Close the modal when clicking outside of the modal content
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Handle form submission
+  document.getElementById("invoiceForm").onsubmit = function (event) {
+    event.preventDefault();
+    // Handle form submission logic here
+    alert("Invoice created!");
+    modal.style.display = "none"; // Close modal after submission
+  };
+});
 
 // Add category pop up
 document.addEventListener("DOMContentLoaded", () => {
@@ -278,11 +309,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create FormData object for sending to server
     const formData = new FormData();
     formData.append("productId", productId);
-    formData.append("productName", name); // Add product name
-    formData.append("category", cat); // Add category
-    formData.append("description", desc); // Add description
-    formData.append("image", file); // Add image file
-    formData.append("isFeatured", isFeatured); // Add isFeatured flag
+    formData.append("productName", name);
+    formData.append("category", cat);
+    formData.append("description", desc);
+    formData.append("image", file);
+    formData.append("isFeatured", isFeatured);
 
     // Send the form data to the server
     fetch("/api/add-featured-product", {
@@ -378,78 +409,40 @@ function clearForm() {
 }
 
 // Add Expense
-document.addEventListener("DOMContentLoaded", function () {
-  const addExpenseBtn = document.querySelector(".expense-container .btn");
-  const expenseTable = document.querySelector(".expense-container table tbody");
+// Show the modal when the "Add Expense" button is clicked
+document.getElementById('addExpenseButton').addEventListener('click', function() {
+    document.getElementById('expenseModal').style.display = 'block';
+});
 
-  addExpenseBtn.addEventListener("click", function (e) {
-    e.preventDefault();
+// Close the modal when the close button is clicked
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('expenseModal').style.display = 'none';
+});
 
-    // Get form values
-    const date = document.getElementById("date").value;
-    const category = document.getElementById("category").value;
-    const description = document.getElementById("description").value;
-    const amount = document.getElementById("amount").value;
+// Add expense to the table when the "Add" button in the modal is clicked
+document.getElementById('submitExpense').addEventListener('click', function() {
+    const modalDate = document.getElementById('modalDate').value;
+    const modalCategory = document.getElementById('modalCategory').value;
+    const modalDescription = document.getElementById('modalDescription').value;
+    const modalAmount = document.getElementById('modalAmount').value;
 
-    // Validate inputs
-    if (
-      !date.trim() ||
-      !category.trim() ||
-      category === "Select category" ||
-      !description.trim() ||
-      !amount.trim()
-    ) {
-      alert("Please fill in all fields");
-      return;
-    } else {
-      // Create new table row
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-                <td>${formatDate(date)}</td>
-                <td>${category}</td>
-                <td>${description}</td>
-                <td>&#8373;${parseFloat(amount).toFixed(2)}</td>
-                <td class="actions"><i class="fas fa-trash-alt"></i></td>
-            `;
+    // Create a new row for the table
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${modalDate}</td>
+        < td>${modalCategory}</td>
+        <td>${modalDescription}</td>
+        <td>${modalAmount}</td>
+        <td><button><i class="fas fa-edit"></i></button><button><i class="fas fa-trash-alt"></i></button></td>
+    `;
+    document.getElementById('expenseTableBody').appendChild(newRow);
 
-      // Add new row to table
-      expenseTable.appendChild(newRow);
+    // Clear the modal fields
+    document.getElementById('modalDate').value = '';
+    document.getElementById('modalCategory').value = '';
+    document.getElementById('modalDescription').value = '';
+    document.getElementById('modalAmount').value = '';
 
-      // Clear form fields
-      document.getElementById("date").value = "";
-      document.getElementById("category").value = "Select category";
-      document.getElementById("description").value = "";
-      document.getElementById("amount").value = "";
-
-      // Add delete functionality to new row
-      const deleteIcon = newRow.querySelector(".fa-trash-alt");
-      deleteIcon.addEventListener("click", function () {
-        if (confirm("Are you sure you want to delete this expense?")) {
-          newRow.remove();
-        }
-      });
-
-      // Optional: Add a success message
-      alert("Expense added successfully!");
-    }
-  });
-
-  // Helper function to format date
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const options = { year: "numeric", month: "short", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  }
-
-  // Add delete functionality to existing rows
-  const existingDeleteIcons = document.querySelectorAll(
-    ".expense-container .fa-trash-alt"
-  );
-  existingDeleteIcons.forEach((icon) => {
-    icon.addEventListener("click", function () {
-      if (confirm("Are you sure you want to delete this expense?")) {
-        this.closest("tr").remove();
-      }
-    });
-  });
+    // Close the modal
+    document.getElementById('expenseModal').style.display = 'none';
 });
