@@ -951,9 +951,9 @@ Desktop Slider
 */
 
 .slider-container {
-  width: 58vw;
+  width: 63vw;
   height: 58vh;
-  margin: 90px 0 0 50px;
+  margin: 90px 0 0 20px;
   position: relative;
   display: inline-block;
   position: relative;
@@ -1025,7 +1025,7 @@ Desktop Slider
   border-radius: 10px;
 }
 
-.slide-content {
+/* .slide-content {
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -1034,9 +1034,9 @@ Desktop Slider
   background-color: rgba(0, 0, 0, 0.091);
   color: #131313;
   border-radius: 5px;
-}
+} */
 
-.slide-content h2 {
+/* .slide-content h2 {
   font-size: 24px;
   color: hsl(0, 0%, 100%);
   margin-bottom: 10px;
@@ -1056,7 +1056,7 @@ Desktop Slider
   font-size: 16px;
   cursor: pointer;
   border-radius: 8px;
-}
+} */
 
 .slider-controls {
   position: absolute;

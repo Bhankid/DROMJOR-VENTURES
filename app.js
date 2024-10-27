@@ -257,46 +257,49 @@ app.post("/api/add-to-cart", (req, res) => {
 
 // API endpoint to insert invoice data
 app.post('/api/invoices', (req, res) => {
-    const { customer_name, amount, status } = req.body;
+    const { customer_name, amount, payment_status, order_status } = req.body;
 
-    // Log the request body to verify the data being sent
-    console.log('Received invoice data:', req.body);
-
-    // Validate input
-    if (!customer_name || !amount || !status) {
-        console.log('Validation failed. Missing fields.');
-        return res.status(400).json({ error: 'All fields are required.' });
+    // Validate input data
+    if (!customer_name || !amount || !payment_status || !order_status) {
+        return res.status(400).json({ error: 'All fields are required' });
     }
 
-    // SQL query to insert data
-    const query = 'INSERT INTO Invoice (customer_name, amount, status) VALUES (?, ?, ?)';
-    db.query(query, [customer_name, amount, status], (err, result) => {
-        if (err) {
-            console.error('Error inserting data:', err);
-            return res.status(500).json({ error: 'Failed to insert data.' });
+    // SQL query to insert a new invoice
+    const query = `
+        INSERT INTO Invoice (customer_name, amount, payment_status, order_status) 
+        VALUES (?, ?, ?, ?)
+    `;
+
+    const values = [customer_name, amount, payment_status, order_status];
+
+    // Execute the query
+    db.query(query, values, (error, results) => {
+        if (error) {
+            console.error('Error inserting invoice:', error);
+            return res.status(500).json({ error: 'An error occurred while inserting the invoice' });
         }
-        
-        // Return the newly created invoice ID
-        res.status(201).json({ 
-            message: 'Invoice created successfully!', 
-            invoice_id: result.insertId // The ID of the newly created invoice
-        });
+        res.status(201).json({ message: 'Invoice created successfully', invoiceId: results.insertId });
     });
 });
 
+// Catch-all error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: "Something went wrong!", details: err.message });
+});
 
 // Handle POST request to add a category
 app.post('/api/categories', (req, res) => {
-  const { name, lastUpdated } = req.body;
+  const { id, name, lastUpdated } = req.body; // Accepting id from the request body
 
   // Validate input
-  if (!name || !lastUpdated) {
+  if (!id || !name || !lastUpdated) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
   // SQL query to insert a new category
-  const query = 'INSERT INTO category (name, date_updated) VALUES (?, ?)';
-  db.query(query, [name, lastUpdated], (err, results) => {
+  const query = 'INSERT INTO category (category_id, name, date_updated) VALUES (?, ?, ?)';
+  db.query(query, [id, name, lastUpdated], (err, results) => {
     if (err) {
       if (err.code === "ER_DUP_ENTRY") {
         return res.status(409).json({ error: "Category name already exists" });
@@ -308,12 +311,11 @@ app.post('/api/categories', (req, res) => {
     // Successful response
     res.status(201).json({
       message: "Category added successfully",
-      category_id: results.insertId,
+      category_id: id, // Return the id used
       name: name, // Include the name in the response
     });
   });
 });
-
 
 // Update a category
 app.put("/api/categories/:id", (req, res) => {
