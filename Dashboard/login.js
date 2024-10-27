@@ -18,12 +18,35 @@ document
       const data = await response.json();
 
       if (response.ok) {
-        alert("Login successful!");
-        window.location.href = "/dashboard";
+        toastr.success("Login successful!"); 
+        setTimeout(() => {
+          window.location.href = "/dashboard"; 
+        }, 2000);
       } else {
-        alert(data.error || "Invalid login credentials. Please try again.");
+        toastr.error(
+          data.error || "Invalid login credentials. Please try again."
+        ); // Show error toast
       }
     } catch (error) {
-      alert("An error occurred. Please try again later.");
+      toastr.error("An error occurred. Please try again later."); // Show error toast
     }
   });
+
+
+  toastr.options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: false,
+    progressBar: true,
+    positionClass: "toast-bottom-right",
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: "300",
+    hideDuration: "1000",
+    timeOut: "3000",
+    extendedTimeOut: "1000",
+    showEasing: "easeInBounce",
+    hideEasing: "easeOutBounce",
+    showMethod: "slideDown",
+    hideMethod: "slideUp",
+  };

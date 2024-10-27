@@ -133,3 +133,17 @@
      border-radius: 0;
      box-shadow: none;
  }
+
+
+ .toast {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     background-color: #28a745;
+     /* Green background for success */
+     color: white;
+     padding: 10px;
+     border-radius: 5px;
+     z-index: 1000;
+     transition: opacity 0.5s ease;
+ }

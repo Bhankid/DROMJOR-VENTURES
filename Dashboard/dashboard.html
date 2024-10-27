@@ -23,7 +23,7 @@
         <a href="login.html" class="active"><i class="fas fa-home" data-id="home"></i> Dashboard</a>
         <a href="#"><i class="fas fa-dollar-sign" data-id="invoice"></i> Invoices</a>
         <a href="#"><i class="fas fa-dollar-sign" data-id="expense"></i> Expense</a>
-        <a href="#"><i class="fas fa-box active" data-id="products"></i> Products</a>
+        <!-- <a href="#"><i class="fas fa-box active" data-id="products"></i> Products</a> -->
         <!-- <a href="#"><i class="fas fa-shopping-cart" data-id="orders"></i> Orders</a> -->
         <a href="#"><i class="fas fa-layer-group" data-id="f-products"></i> Featured Products</a>
         <a href="#"><i class="fas fa-layer-group" data-id="categories"></i> Categories</a>
@@ -168,7 +168,7 @@
                             <i class="fas fa-trash"></i>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="total" id="total">
                         <td colspan="5"><strong>Total</strong></td>
                         <td><strong>&#8373;846.85</strong></td>
                         <td colspan="3"></td>
@@ -211,7 +211,7 @@
         </div>
 
         <!-- Products -->
-        <section class="content-1" data-id="products">
+        <!-- <section class="content-1" data-id="products">
             <h1>Products</h1>
             <p>Manage your product inventory</p>
             <button class="add-product"><i class="fas fa-plus"></i> Add Product</button>
@@ -258,7 +258,7 @@
                     </tr>
                 </tbody>
             </table>
-        </section>
+        </section> -->
 
         <div class="c-container content-1" data-id="customers">
             <h1>Customers</h1>
@@ -308,8 +308,8 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
+                <tbody id="categoryTableBody">
+                    <!-- <tr>
                         <td>Fresh Foods</td>
                         <td>2024-10-15</td>
                         <td class="actions">
@@ -332,7 +332,7 @@
                             <i class="fas fa-edit"></i>
                             <i class="fas fa-trash"></i>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
                 <div id="popupMenu" class="popup">
                     <div class="popup-content">
@@ -691,16 +691,18 @@
         </div>
 
 
-        <!-- Logout Section -->
-        <div class="logout-container content-1" data-id="logout">
-            <h1>Logged Out Successfully</h1>
-            <p>You have been logged out of your account.</p>
-            <div class="button-container">
-                <a href="login.html" class="btn">Login Again</a>
-                <a href="index.html" class="btn">Go to Home</a>
+        <!-- Logout Confirmation Modal -->
+        <div id="logoutModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeLogoutModal">&times;</span>
+                <h2>Confirm Logout</h2>
+                <p>Are you sure you want to log out?</p>
+                <div class="modal-buttons">
+                    <button id="confirmLogout" class="btn">Yes, Log Out</button>
+                    <button id="cancelLogout" class="btn">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
 
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -77,6 +77,38 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Function to calculate the total of currency amounts in <td> elements with colspan="2"
+function calculateTotal() {
+  // Select all <td> elements with colspan="2"
+  const amountCells = document.querySelectorAll('td[colspan="2"]');
+  let total = 0;
+
+  amountCells.forEach((cell) => {
+    // Get the text content of the cell
+    const cellText = cell.textContent.trim();
+
+    // Check if the text contains a currency symbol (for example, "&#8373;" for currency)
+    // and remove the currency symbol and any commas before converting to a float
+    if (cellText.includes("&#8373;")) {
+      const amount = parseFloat(
+        cellText.replace("&#8373;", "").replace(",", "").trim()
+      );
+      if (!isNaN(amount)) {
+        total += amount; // Add the amount to the total
+      }
+    }
+  });
+
+  // Display the total in the desired location
+  const totalCell = document.querySelector("#total td:last-child strong");
+  if (totalCell) {
+    totalCell.textContent = `&#8373;${total.toFixed(2)}`; // Update the total cell with the new total
+  }
+}
+
+// Call the function to calculate the total
+calculateTotal();
+
 // Invoice Pop Up
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("invoiceModal");
@@ -102,10 +134,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle form submission
   document.getElementById("invoiceForm").onsubmit = function (event) {
-    event.preventDefault();
-    // Handle form submission logic here
-    alert("Invoice created!");
-    modal.style.display = "none"; // Close modal after submission
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    const invoiceId = document.getElementById("invoiceId").value;
+    const customerName = document.getElementById("customer").value;
+    const amount = parseFloat(document.getElementById("amount").value);
+    const paymentStatus = document.getElementById("paymentStatus").value;
+    const orderStatus = document.getElementById("orderStatus").value;
+
+    // Create an invoice object
+    const invoiceData = {
+      invoice_id: invoiceId, // Invoice ID from form
+      customer_name: customerName,
+      amount: amount,
+      status: paymentStatus, // Assuming payment status is what you want to send
+    };
+
+    // Send data to the backend
+    fetch("/api/invoices", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(invoiceData),
+    })
+      .then((response) => {
+        console.log("Response status:", response.status); // Log the status code
+        return response.json().then((data) => {
+          if (!response.ok)
+            throw new Error(data.error || "Network response was not ok");
+          return data;
+        });
+      })
+      .then((data) => {
+        // Handle success - add the new invoice to the table
+        const invoiceTableBody = document
+          .getElementById("invoiceTable")
+          .querySelector("tbody");
+
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+        <td>${data.invoice_id}</td>
+        <td>${customerName}</td>
+        <td>${amount}</td>
+        <td>${paymentStatus}</td>
+        <td>${orderStatus}</td>
+        <td>
+          <button><i class="fas fa-edit"></i></button>
+          <button><i class="fas fa-trash-alt"></i></button>
+        </td>
+      `;
+        invoiceTableBody.prepend(newRow); // Add the new row at the top of the table
+
+        // Clear the form fields
+        document.getElementById("invoiceForm").reset();
+        // Close the modal
+        modal.style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to create invoice. Please try again.");
+      });
   };
 });
 
@@ -115,35 +205,224 @@ document.addEventListener("DOMContentLoaded", () => {
   const addCategoryBtn = document.getElementById("addCategoryBtn");
   const closePopup = document.getElementById("closePopup");
   const submitBtn = document.getElementById("submitBtn");
+  const categoryTable = document.getElementById("categoryTableBody");
 
-  // Show the popup when the button is clicked
+  // Load categories from local storage and populate the table
+  function loadCategories() {
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+    categories.forEach((category) => {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${category.name}</td>
+        <td>${category.lastUpdated}</td>
+        <td class="actions">
+          <i class="fas fa-edit" data-id="${category.id}"></i>
+          <i class="fas fa-trash" data-id="${category.id}"></i>
+        </td>
+      `;
+      categoryTable.prepend(newRow);
+
+      // Add event listeners for edit and delete buttons
+      newRow.querySelector(".fa-edit").addEventListener("click", editCategory);
+      newRow
+        .querySelector(".fa-trash")
+        .addEventListener("click", deleteCategory);
+    });
+  }
+
+  // Call loadCategories on page load
+  loadCategories();
+
+  // Open popup
   addCategoryBtn.onclick = function () {
     popupMenu.style.display = "block";
   };
 
-  // Close the popup when the close button is clicked
+  // Close popup
   closePopup.onclick = function () {
     popupMenu.style.display = "none";
   };
 
-  // Close the popup when clicking outside of the popup content
+  // Close popup when clicking outside of it
   window.onclick = function (event) {
     if (event.target === popupMenu) {
       popupMenu.style.display = "none";
     }
   };
 
-  // Handle the submit button click
-  submitBtn.onclick = function () {
+  // Handle category submission
+  submitBtn.onclick = async function () {
     const name = document.getElementById("name").value;
     const lastUpdated = document.getElementById("lastUpdated").value;
 
-    // You can process the input values here
-    console.log(`Name: ${name}, Last Updated: ${lastUpdated}`);
+    if (!name || !lastUpdated) {
+      alert("Please fill in all fields");
+      return;
+    }
 
-    // Optionally, close the popup after submission
-    popupMenu.style.display = "none";
+    try {
+      const response = await fetch("/api/categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          lastUpdated: lastUpdated,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (categoryTable) {
+          const newRow = document.createElement("tr");
+          newRow.innerHTML = `
+            <td>${name}</td>
+            <td>${lastUpdated}</td>
+            <td class="actions">
+              <i class="fas fa-edit" data-id="${data.category_id}"></i>
+              <i class="fas fa-trash" data-id="${data.category_id}"></i>
+            </td>
+          `;
+          categoryTable.prepend(newRow);
+
+          // Store category data in local storage
+          const categories =
+            JSON.parse(localStorage.getItem("categories")) || [];
+          categories.push({ id: data.category_id, name, lastUpdated });
+          localStorage.setItem("categories", JSON.stringify(categories));
+
+          // Add event listeners for edit and delete buttons
+          newRow
+            .querySelector(".fa-edit")
+            .addEventListener("click", editCategory);
+          newRow
+            .querySelector(".fa-trash")
+            .addEventListener("click", deleteCategory);
+        }
+
+        // Clear form and close popup
+        document.getElementById("name").value = "";
+        document.getElementById("lastUpdated").value = "";
+        popupMenu.style.display = "none";
+
+        alert("Category added successfully!");
+      } else {
+        const error = await response.json();
+        alert(error.error || "Failed to add category");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to add category. Please try again.");
+    }
   };
+
+  // Function to handle category editing
+  async function editCategory(event) {
+    const categoryId = event.target.getAttribute("data-id");
+    const row = event.target.closest("tr");
+    const name = row.querySelector("td:nth-child(1)").textContent;
+    const lastUpdated = row.querySelector("td:nth-child(2)").textContent;
+
+    // Prompt user to enter new values
+    const newName = prompt("Enter new category name:", name);
+    const newDate = prompt("Enter new last updated date:", lastUpdated);
+
+    if (!newName || !newDate) {
+      alert("Please provide valid inputs.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/categories/${categoryId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: newName, lastUpdated: newDate }),
+      });
+
+      if (!response.ok) {
+        const contentType = response.headers.get("content-type");
+        let errorMessage;
+
+        if (contentType && contentType.includes("application/json ")) {
+          errorMessage = await response.json();
+        } else {
+          errorMessage = "Failed to update category";
+        }
+
+        alert(errorMessage);
+        return;
+      }
+
+      // Update local storage
+      const categories = JSON.parse(localStorage.getItem("categories"));
+      const categoryIndex = categories.findIndex(
+        (category) => category.id === categoryId
+      );
+      categories[categoryIndex].name = newName;
+      categories[categoryIndex].lastUpdated = newDate;
+      localStorage.setItem("categories", JSON.stringify(categories));
+
+      // Update table row
+      row.querySelector("td:nth-child(1)").textContent = newName;
+      row.querySelector("td:nth-child(2)").textContent = newDate;
+
+      alert("Category updated successfully!");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to update category. Please try again.");
+    }
+  }
+
+  // Function to handle category deletion
+  async function deleteCategory(event) {
+    const categoryId = event.target.getAttribute("data-id");
+    const row = event.target.closest("tr");
+
+    try {
+      const response = await fetch(`/api/categories/${categoryId}`, {
+        method: "DELETE",
+      });
+
+      // Check if the response is OK
+      if (!response.ok) {
+        const contentType = response.headers.get("content-type");
+        let errorMessage;
+
+        // Handle JSON response
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          errorMessage = errorData.error || "Failed to delete category";
+        } else {
+          errorMessage = "Failed to delete category";
+        }
+
+        alert(errorMessage);
+        return;
+      }
+
+      // If successful, remove from local storage
+      const categories = JSON.parse(localStorage.getItem("categories"));
+      const categoryIndex = categories.findIndex(
+        (category) => category.id === categoryId
+      );
+      if (categoryIndex !== -1) {
+        categories.splice(categoryIndex, 1);
+        localStorage.setItem("categories", JSON.stringify(categories));
+      }
+
+      // Remove table row
+      row.remove();
+
+      alert("Category deleted successfully!");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to delete category. Please try again.");
+    }
+  }
 });
 
 const fileInput = document.getElementById("file-input");
@@ -410,39 +689,85 @@ function clearForm() {
 
 // Add Expense
 // Show the modal when the "Add Expense" button is clicked
-document.getElementById('addExpenseButton').addEventListener('click', function() {
-    document.getElementById('expenseModal').style.display = 'block';
-});
+document
+  .getElementById("addExpenseButton")
+  .addEventListener("click", function () {
+    document.getElementById("expenseModal").style.display = "block";
+  });
 
 // Close the modal when the close button is clicked
-document.getElementById('closeModal').addEventListener('click', function() {
-    document.getElementById('expenseModal').style.display = 'none';
+document.getElementById("closeModal").addEventListener("click", function () {
+  document.getElementById("expenseModal").style.display = "none";
 });
 
-// Add expense to the table when the "Add" button in the modal is clicked
-document.getElementById('submitExpense').addEventListener('click', function() {
-    const modalDate = document.getElementById('modalDate').value;
-    const modalCategory = document.getElementById('modalCategory').value;
-    const modalDescription = document.getElementById('modalDescription').value;
-    const modalAmount = document.getElementById('modalAmount').value;
+// Close the modal when clicking outside of the modal content
+window.onclick = function (event) {
+  if (event.target === expenseModal) {
+    expenseModal.style.display = "none";
+  }
+};
 
-    // Create a new row for the table
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
+// Add expense to the table when the "Add" button in the modal is clicked
+document.getElementById("submitExpense").addEventListener("click", function () {
+  const modalDate = document.getElementById("modalDate").value;
+  const modalCategory = document.getElementById("modalCategory").value;
+  const modalDescription = document.getElementById("modalDescription").value;
+  const modalAmount = document.getElementById("modalAmount").value;
+
+  // Create a new row for the table
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
         <td>${modalDate}</td>
         < td>${modalCategory}</td>
         <td>${modalDescription}</td>
         <td>${modalAmount}</td>
         <td><button><i class="fas fa-edit"></i></button><button><i class="fas fa-trash-alt"></i></button></td>
     `;
-    document.getElementById('expenseTableBody').appendChild(newRow);
+  document.getElementById("expenseTableBody").appendChild(newRow);
 
-    // Clear the modal fields
-    document.getElementById('modalDate').value = '';
-    document.getElementById('modalCategory').value = '';
-    document.getElementById('modalDescription').value = '';
-    document.getElementById('modalAmount').value = '';
+  // Clear the modal fields
+  document.getElementById("modalDate").value = "";
+  document.getElementById("modalCategory").value = "";
+  document.getElementById("modalDescription").value = "";
+  document.getElementById("modalAmount").value = "";
 
-    // Close the modal
-    document.getElementById('expenseModal').style.display = 'none';
+  // Close the modal
+  document.getElementById("expenseModal").style.display = "none";
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const logoutButton = document.querySelector(".logout"); // Adjust selector if necessary
+  const logoutModal = document.getElementById("logoutModal");
+  const closeLogoutModal = document.getElementById("closeLogoutModal");
+  const confirmLogout = document.getElementById("confirmLogout");
+  const cancelLogout = document.getElementById("cancelLogout");
+
+  // Show the logout modal when the logout button is clicked
+  logoutButton.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the default logout action
+    logoutModal.style.display = "block"; // Show the modal
+  });
+
+  // Close the modal when the close button is clicked
+  closeLogoutModal.addEventListener("click", function () {
+    logoutModal.style.display = "none"; // Hide the modal
+  });
+
+  // Close the modal when the cancel button is clicked
+  cancelLogout.addEventListener("click", function () {
+    logoutModal.style.display = "none"; // Hide the modal
+  });
+
+  // Confirm logout and redirect to the logout page
+  confirmLogout.addEventListener("click", function () {
+    // Redirect to the logout URL or perform logout action
+    window.location.href = "logout.html";
+  });
+
+  // Close the modal when clicking outside of the modal content
+  window.addEventListener("click", function (event) {
+    if (event.target === logoutModal) {
+      logoutModal.style.display = "none"; // Hide the modal
+    }
+  });
 });

@@ -254,6 +254,124 @@ app.post("/api/add-to-cart", (req, res) => {
   }
 });
 
+
+// API endpoint to insert invoice data
+app.post('/api/invoices', (req, res) => {
+    const { customer_name, amount, status } = req.body;
+
+    // Log the request body to verify the data being sent
+    console.log('Received invoice data:', req.body);
+
+    // Validate input
+    if (!customer_name || !amount || !status) {
+        console.log('Validation failed. Missing fields.');
+        return res.status(400).json({ error: 'All fields are required.' });
+    }
+
+    // SQL query to insert data
+    const query = 'INSERT INTO Invoice (customer_name, amount, status) VALUES (?, ?, ?)';
+    db.query(query, [customer_name, amount, status], (err, result) => {
+        if (err) {
+            console.error('Error inserting data:', err);
+            return res.status(500).json({ error: 'Failed to insert data.' });
+        }
+        
+        // Return the newly created invoice ID
+        res.status(201).json({ 
+            message: 'Invoice created successfully!', 
+            invoice_id: result.insertId // The ID of the newly created invoice
+        });
+    });
+});
+
+
+// Handle POST request to add a category
+app.post('/api/categories', (req, res) => {
+  const { name, lastUpdated } = req.body;
+
+  // Validate input
+  if (!name || !lastUpdated) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  // SQL query to insert a new category
+  const query = 'INSERT INTO category (name, date_updated) VALUES (?, ?)';
+  db.query(query, [name, lastUpdated], (err, results) => {
+    if (err) {
+      if (err.code === "ER_DUP_ENTRY") {
+        return res.status(409).json({ error: "Category name already exists" });
+      }
+      console.error("Error inserting category:", err);
+      return res.status(500).json({ error: "Failed to add category" });
+    }
+
+    // Successful response
+    res.status(201).json({
+      message: "Category added successfully",
+      category_id: results.insertId,
+      name: name, // Include the name in the response
+    });
+  });
+});
+
+
+// Update a category
+app.put("/api/categories/:id", (req, res) => {
+  const { name, lastUpdated } = req.body;
+  const categoryId = req.params.id;
+
+  // Validate input
+  if (!name || !lastUpdated) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  // Check if the category exists
+  const checkQuery = "SELECT * FROM category WHERE category_id = ?";
+  db.query(checkQuery, [categoryId], (err, results) => {
+    if (err) {
+      console.error("Error checking category existence:", err);
+      return res.status(500).json({ error: "Failed to check category" });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+
+    // SQL query to update the category
+    const updateQuery =
+      "UPDATE category SET name = ?, date_updated = ? WHERE category_id = ?";
+    db.query(updateQuery, [name, lastUpdated, categoryId], (err, result) => {
+      if (err) {
+        console.error("Error updating category:", err);
+        return res.status(500).json({ error: "Failed to update category" });
+      }
+
+      res.status(200).json({ message: "Category updated successfully" });
+    });
+  });
+});
+
+// Delete a category
+app.delete('/api/categories/:id', (req, res) => {
+  const categoryId = req.params.id;
+
+  // SQL query to delete the category
+  const query = 'DELETE FROM category WHERE category_id = ?';
+  db.query(query, [categoryId], (err, result) => {
+    if (err) {
+      console.error('Error deleting category:', err);
+      return res.status(500).json({ error: 'Failed to delete category' });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    res.status(200).json({ message: 'Category deleted successfully' });
+  });
+});
+
+
 // Connect to the database and start the server
 db.connect((err) => {
   if (err) {
