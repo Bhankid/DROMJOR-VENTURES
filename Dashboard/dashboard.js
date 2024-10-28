@@ -203,12 +203,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const addCategoryBtn = document.getElementById("addCategoryBtn");
   const closePopup = document.getElementById("closePopup");
   const submitBtn = document.getElementById("submitBtn");
-  const categoryTable = document.getElementById("categoryTableBody");
+  const categoryTable = document.getElementById("categoryTableBody"); // Use the correct ID for tbody
 
-  // Load categories from local storage and populate the table
+  // Load categories from localStorage and populate the table
   function loadCategories() {
     const categories = JSON.parse(localStorage.getItem("categories")) || [];
-    categoryTable.innerHTML = ""; // Clear the table before loading
+    categoryTable.innerHTML = ""; // Clear the table
+
     categories.forEach((category) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
@@ -227,25 +228,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Call loadCategories on page load
+  // Load existing categories on page load
   loadCategories();
-
-  // Open popup
-  addCategoryBtn.onclick = function () {
-    popupMenu.style.display = "block";
-  };
-
-  // Close popup
-  closePopup.onclick = function () {
-    popupMenu.style.display = "none";
-  };
-
-  // Close popup when clicking outside of it
-  window.onclick = function (event) {
-    if (event.target === popupMenu) {
-      popupMenu.style.display = "none";
-    }
-  };
 
   // Function to generate a unique category ID
   function generateCategoryId() {
@@ -272,28 +256,26 @@ document.addEventListener("DOMContentLoaded", () => {
       lastUpdated: lastUpdated
     };
 
-    // Store category data in local storage
+    // Store category data in localStorage
     const categories = JSON.parse(localStorage.getItem("categories")) || [];
     categories.push(newCategory);
     localStorage.setItem("categories", JSON.stringify(categories));
 
     // Update the table
-    if (categoryTable) {
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-        <td>${name}</td>
-        <td>${lastUpdated}</td>
-        <td class="actions">
-          <i class="fas fa-edit" data-id="${categoryId}"></i>
-          <i class="fas fa-trash" data-id="${categoryId}"></i>
-        </td>
-      `;
-      categoryTable.prepend(newRow);
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>${name}</td>
+      <td>${lastUpdated}</td>
+      <td class="actions">
+        <i class="fas fa-edit" data-id="${categoryId}"></i>
+        <i class="fas fa-trash" data-id="${categoryId}"></i>
+      </td>
+    `;
+    categoryTable.prepend(newRow);
 
-      // Add event listeners for edit and delete buttons
-      newRow.querySelector(".fa-edit").addEventListener("click", editCategory);
-      newRow.querySelector(".fa-trash").addEventListener("click", deleteCategory);
-    }
+    // Add event listeners for edit and delete buttons
+    newRow.querySelector(".fa-edit").addEventListener("click", editCategory);
+    newRow.querySelector(".fa-trash").addEventListener("click", deleteCategory);
 
     // Clear form and close popup
     document.getElementById("name").value = "";
@@ -301,6 +283,19 @@ document.addEventListener("DOMContentLoaded", () => {
     popupMenu.style.display = "none";
 
     alert("Category added successfully!");
+
+    // Send the new category to the backend
+    try {
+      await fetch("/api/categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCategory),
+      });
+    } catch (error) {
+      console.error("Error sending category to backend:", error);
+    }
   };
 
   // Function to handle category editing
@@ -320,8 +315,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch(`/api/categories/${categoryId}`, {
-        method: "PUT ",
+      // Update localStorage
+      const categories = JSON.parse(localStorage.getItem("categories")) || [];
+      const categoryIndex = categories.findIndex((category) => category.id === categoryId);
+      if (categoryIndex !== -1) {
+        categories[categoryIndex].name = newName;
+        categories[categoryIndex].lastUpdated = newDate;
+        localStorage.setItem("categories", JSON.stringify(categories));
+      }
+
+      // Update table row
+      row.querySelector("td:nth-child(1)").textContent = newName;
+      row.querySelector("td:nth-child(2)").textContent = newDate;
+
+      alert("Category updated successfully!");
+
+      // Send update to the backend
+      await fetch(`/api/categories/${categoryId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -330,28 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
           lastUpdated: newDate,
         }),
       });
-
-      if (response.ok) {
-        // Update local storage
-        const categories = JSON.parse(localStorage.getItem("categories"));
-        const categoryIndex = categories.findIndex(
-          (category) => category.id === categoryId
-        );
-        if (categoryIndex !== -1) {
-          categories[categoryIndex].name = newName;
-          categories[categoryIndex].lastUpdated = newDate;
-          localStorage.setItem("categories", JSON.stringify(categories));
-        }
-
-        // Update table row
-        row.querySelector("td:nth-child(1)").textContent = newName;
-        row.querySelector("td:nth-child(2)").textContent = newDate;
-
-        alert("Category updated successfully!");
-      } else {
-        const error = await response.json();
-        alert(error.error || "Failed to update category");
-      }
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to update category. Please try again.");
@@ -363,35 +352,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoryId = event.target.getAttribute("data-id");
     const row = event.target.closest("tr");
 
-    try {
-      const response = await fetch(`/api/categories/${categoryId}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        // Remove from local storage
-        const categories = JSON.parse(localStorage.getItem("categories"));
-        const categoryIndex = categories.findIndex(
-          (category) => category.id === categoryId
-        );
-        if (categoryIndex !== -1) {
-          categories.splice(categoryIndex, 1);
-          localStorage.setItem("categories", JSON.stringify(categories));
-        }
+    if (confirm("Are you sure you want to delete this category?")) {
+      try {
+        // Remove from localStorage
+        const categories = JSON.parse(localStorage.getItem("categories")) || [];
+        const updatedCategories = categories.filter(category => category.id !== categoryId);
+        localStorage.setItem("categories", JSON.stringify(updatedCategories));
 
         // Remove table row
         row.remove();
 
         alert("Category deleted successfully!");
-      } else {
-        const error = await response.json();
-        alert(error.error || "Failed to delete category");
+
+        // Send delete request to the backend
+        await fetch(`/api/categories/${categoryId}`, {
+          method: "DELETE",
+        });
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to delete category. Please try again.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to delete category. Please try again.");
     }
   }
+
+  // Open popup
+  addCategoryBtn.onclick = function () {
+    popupMenu.style.display = "block";
+  };
+
+  // Close popup
+  closePopup.onclick = function () {
+    popupMenu.style.display = "none";
+  };
+
+  // Close popup when clicking outside
+  window.onclick = function (event) {
+    if (event.target === popupMenu) {
+      popupMenu.style.display = "none";
+    }
+  };
 });
 
 

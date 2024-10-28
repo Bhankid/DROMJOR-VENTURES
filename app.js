@@ -302,7 +302,7 @@ app.post('/api/categories', (req, res) => {
   db.query(query, [id, name, lastUpdated], (err, results) => {
     if (err) {
       if (err.code === "ER_DUP_ENTRY") {
-        return res.status(409).json({ error: "Category name already exists" });
+        return res.status(409).json({ error: "Category ID already exists" });
       }
       console.error("Error inserting category:", err);
       return res.status(500).json({ error: "Failed to add category" });
@@ -317,61 +317,46 @@ app.post('/api/categories', (req, res) => {
   });
 });
 
-// Update a category
 app.put("/api/categories/:id", (req, res) => {
   const { name, lastUpdated } = req.body;
   const categoryId = req.params.id;
 
-  // Validate input
   if (!name || !lastUpdated) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  // Check if the category exists
-  const checkQuery = "SELECT * FROM category WHERE category_id = ?";
-  db.query(checkQuery, [categoryId], (err, results) => {
+  const query =
+    "UPDATE category SET name = ?, date_updated = ? WHERE category_id = ?";
+  db.query(query, [name, lastUpdated, categoryId], (err, result) => {
     if (err) {
-      console.error("Error checking category existence:", err);
-      return res.status(500).json({ error: "Failed to check category" });
+      console.error("Error updating category:", err);
+      return res.status(500).json({ error: "Failed to update category" });
     }
-
-    if (results.length === 0) {
-      return res.status(404).json({ error: "Category not found" });
-    }
-
-    // SQL query to update the category
-    const updateQuery =
-      "UPDATE category SET name = ?, date_updated = ? WHERE category_id = ?";
-    db.query(updateQuery, [name, lastUpdated, categoryId], (err, result) => {
-      if (err) {
-        console.error("Error updating category:", err);
-        return res.status(500).json({ error: "Failed to update category" });
-      }
-
-      res.status(200).json({ message: "Category updated successfully" });
-    });
+    res.status(200).json({ message: "Category updated successfully" });
   });
 });
 
-// Delete a category
-app.delete('/api/categories/:id', (req, res) => {
+
+
+app.delete("/api/categories/:id", (req, res) => {
   const categoryId = req.params.id;
 
-  // SQL query to delete the category
-  const query = 'DELETE FROM category WHERE category_id = ?';
+  const query = "DELETE FROM category WHERE category_id = ?";
   db.query(query, [categoryId], (err, result) => {
     if (err) {
-      console.error('Error deleting category:', err);
-      return res.status(500).json({ error: 'Failed to delete category' });
+      console.error("Error deleting category:", err);
+      return res.status(500).json({ error: "Failed to delete category" });
     }
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: "Category not found" });
     }
 
-    res.status(200).json({ message: 'Category deleted successfully' });
+    res.status(200).json({ message: "Category deleted successfully" });
   });
 });
+
+
 
 
 // Connect to the database and start the server
