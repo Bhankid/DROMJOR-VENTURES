@@ -45,7 +45,7 @@
                 <div class="card" data-aos="zoom-in-down">
                     <i class="fas fa-dollar-sign"></i>
                     <h3>Total Revenue</h3>
-                    <div class="value">$45,231.89</div>
+                    <div class="value">&#8373;45,231.89</div>
                     <div class="change"><i class="fas fa-arrow-up"></i> +20.1% from last month</div>
                 </div>
                 <div class="card" data-aos="zoom-in-down">
@@ -54,12 +54,12 @@
                     <div class="value">2,350</div>
                     <div class="change"><i class="fas fa-arrow-up"></i> +180.1% from last month</div>
                 </div>
-                <div class="card" data-aos="zoom-in-down">
+                <!-- <div class="card" data-aos="zoom-in-down">
                     <i class="fas fa-shopping-cart"></i>
                     <h3>Sales</h3>
                     <div class="value">12,234</div>
                     <div class="change"><i class="fas fa-arrow-up"></i> +19% from last month</div>
-                </div>
+                </div> -->
                 <div class="card" data-aos="zoom-in-down">
                     <i class="fas fa-box"></i>
                     <h3>Active Products</h3>
@@ -87,7 +87,7 @@
             <h1>Invoices</h1>
             <p>Manage and generate invoices</p>
             <button class="btn"><i class="fas fa-plus"></i> Generate Invoice</button>
-            <table class="table">
+            <table class="table" id="invoiceTable">
                 <thead>
                     <tr>
                         <th>Invoice ID</th>
@@ -99,7 +99,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>INV-001</td>
                         <td>Akua Agyeiwaa</td>
                         <td>&#8373;599.95</td>
@@ -167,7 +167,7 @@
                             <i class="fas fa-edit"></i>
                             <i class="fas fa-trash"></i>
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr class="total" id="total">
                         <td colspan="5"><strong>Total</strong></td>
                         <td><strong>&#8373;846.85</strong></td>
@@ -262,18 +262,21 @@
 
         <div class="c-container content-1" data-id="customers">
             <h1>Customers</h1>
-            <p class="subtitle">Manage your customer database</p>
+            <div class="top">
+                <p class="subtitle">Manage your customers</p>
+                <button class="customer-btn"><i class="fas fa-plus"></i>Add Customer</button>
+            </div>
             <table>
                 <thead class="table-header">
                     <tr>
                         <th class="header-name">Name</th>
                         <th class="header-telephone">Telephone</th>
                         <th class="header-orders">Total Orders</th>
-                        <th class="header-spent">Total Spent</th>
+                        <th class="header-spent">Amount Paid</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table-row">
+                    <!-- <tr class="table-row">
                         <td class="row-name">Alice Johnson</td>
                         <td class="row-telephone">+233 24 987 6543</td>
                         <td class="row-orders">5</td>
@@ -290,9 +293,32 @@
                         <td class="row-telephone">+233 27 765 4321</td>
                         <td class="row-orders">7</td>
                         <td class="row-spent">&#8373;889.93</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
+        </div>
+
+        <!-- Customer Pop Up -->
+        <div id="customerModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Customer</h2>
+                <form id="customerForm">
+                    <label for="customerName">Name:</label>
+                    <input type="text" id="customerName" required>
+
+                    <label for="customerTelephone">Telephone:</label>
+                    <input type="tel" id="customerTelephone" required>
+
+                    <label for="customerOrders">Total Orders:</label>
+                    <input type="number" id="customerOrders" required>
+
+                    <label for="customerSpent">Amount Paid:</label>
+                    <input type="number" id="customerSpent" step="0.01" required>
+
+                    <button type="submit" id="addCustomerBtn">Add Customer</button>
+                </form>
+            </div>
         </div>
 
         <!-- Categories Section -->
@@ -440,7 +466,7 @@
 
         <!-- Featured Products -->
         <section class="featured-container content-1" data-id="f-products">
-            <h1>Featured Products</h1>
+            <h1>Products</h1>
             <p>Manage featured products to display on the front-end website</p>
             <div class="form-group">
                 <div>
@@ -505,7 +531,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>
                             <div class="product-image">
                                 <img alt="Placeholder image for Wireless Earbuds" height="50"
@@ -594,7 +620,7 @@
                         <td>
                             <i class="fas fa-trash delete-icon">
                             </i>
-                        </td>
+                        </td> -->
                 </tbody>
                 </tr>
             </table>
@@ -633,11 +659,10 @@
             <div class="filter-export">
                 <h1>Expense List</h1>
                 <select>
-                    <option>All Categories</option>
+                    <option>Expense Categories</option>
                 </select>
-                <button><i class="fas fa-download"></i> Export</button>
             </div>
-            <table>
+            <table id="expenseTable">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -648,7 +673,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>Oct 15, 2024</td>
                         <td>Office Supplies</td>
                         <td>Printer paper and ink</td>
@@ -668,15 +693,15 @@
                         <td>Office space rent</td>
                         <td>&#8373;2000.00</td>
                         <td class="actions"><i class="fas fa-trash-alt"></i></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </section>
 
-        <!-- Modal Popup -->
+        <!--Expense Modal Popup -->
         <div id="expenseModal" class="modal">
             <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
+                <span class="close" id="closeModal-1">&times;</span>
                 <h2>Add New Expense</h2>
                 <label for="modalDate">Date</label>
                 <input type="date" id="modalDate">
@@ -705,10 +730,10 @@
         </div>
 
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
 </body>
 
 </html>

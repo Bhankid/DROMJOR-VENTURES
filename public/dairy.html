@@ -135,76 +135,6 @@
         </div>
     </div>
 
-    <!-- Slider -->
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide active">
-                <img src="Images/Web Banner.jpg" alt="Image 1">
-                <!-- <div class="slide-content">
-                    <h2>Fruits</h2>
-                    <p>Get Healthy Fruits</p>
-                    <button>Read More</button>
-                </div> -->
-            </div>
-            <div class="slide">
-                <img src="Images/Web Banner2.jpg" alt="Image 2">
-                <!-- <div class="slide-content">
-                    <h2>Plantain</h2>
-                    <p>Get fresh plantains</p>
-                    <button>Read More</button>
-                </div> -->
-            </div>
-            <div class="slide">
-                <img src="Images/Web Banner3.jpg" alt="Image 3">
-                <!-- <div class="slide-content">
-                    <h2>Vegetables</h2>
-                    <p>Get fresh vegetable</p>
-                    <button>Read More</button>
-                </div> -->
-            </div>
-        </div>
-        <div class="slider-controls">
-            <button class="prev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="next">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-        <div class="pagination">
-            <span class="pagination-item active"></span>
-            <span class="pagination-item"></span>
-            <span class="pagination-item"></span>
-        </div>
-    </div>
-
-    <!-- Offers -->
-    <section class="card-container">
-        <!-- <h2>Image Gallery</h2> -->
-        <div class="card-grid">
-            <article class="card">
-                <div class="card-content">
-                    <!-- <h3 class="card-title">Offer 1</h3> -->
-                    <img class="card-image" src="https://i.postimg.cc/wxQgCq7L/Laundry-Banner-landscape.jpg"
-                        alt="Image 1">
-                </div>
-            </article>
-            <article class="card">
-                <div class="card-content">
-                    <!-- <h3 class="card-title">Offer 2</h3> -->
-                    <img class="card-image" src="https://i.postimg.cc/tCmQbYyZ/Fish-Market-landscape.jpg" alt="Image 2">
-                </div>
-            </article>
-            <!-- <article class="card">
-        <div class="card-content">
-         
-          <img class="card-image" src="Images\img2.jpeg" alt="Image 3">
-        </div>
-      </article> -->
-        </div>
-    </section>
-
-
     <!-- Products and services -->
     <section class="products">
         <div class="header">
@@ -312,7 +242,7 @@
                     <ul class="social-icons">
                         <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-tiktok"></i></a></li>
                         <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
                     </ul>
                 </div>
@@ -343,6 +273,45 @@
 
 
     <script>
+
+        // Add to Cart SideBar
+
+        // Get the cart icon, cart sidebar, and close icon elements
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const closeIcon = document.getElementById('close-icon');
+
+        // Add event listeners to the cart icon and close icon
+        cartIcon.addEventListener('click', () => {
+            // Toggle the open class on the cart sidebar
+            cartSidebar.classList.toggle('open');
+
+            // Prevent body scrolling when the cart sidebar is open
+            if (cartSidebar.classList.contains('open')) {
+                document.body.classList.add('no-scroll');
+            } else {
+                document.body.classList.remove('no-scroll');
+            }
+        });
+
+        closeIcon.addEventListener('click', () => {
+            // Remove the open class from the cart sidebar
+            cartSidebar.classList.remove('open');
+            document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled
+        });
+
+        // Close sidebar on outside click
+        document.addEventListener('click', (event) => {
+            const isClickInside = cartSidebar.contains(event.target) || cartIcon.contains(event.target);
+
+            if (!isClickInside && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+                document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled
+            }
+        });
+
+
+
         document.addEventListener('DOMContentLoaded', function () {
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};  // Load cart items from localStorage or initialize as empty object
             const cartItemsContainer = document.querySelector('.cart-items');

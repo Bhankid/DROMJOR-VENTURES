@@ -109,92 +109,235 @@ function calculateTotal() {
 // Call the function to calculate the total
 calculateTotal();
 
-// Invoice Pop Up
+// Invoice
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("invoiceModal");
-  const btn = document.querySelector('[data-id="invoice"] .btn'); // Select the button within the section
+  const btn = document.querySelector('[data-id="invoice"] .btn');
   const span = document.getElementById("closeModal");
+  const invoiceTableBody = document
+    .getElementById("invoiceTable")
+    .querySelector("tbody");
 
-  // Open the modal when the button is clicked
+  // Function to generate a unique invoice ID
+  function generateInvoiceId() {
+    const randomId = Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit number
+    return `INV-${randomId}`;
+  }
+
+  // Function to store invoices in local storage
+  function storeInvoices(invoices) {
+    localStorage.setItem("invoices", JSON.stringify(invoices));
+  }
+
+  // Function to load invoices from local storage
+  function loadInvoices() {
+    const invoices = JSON.parse(localStorage.getItem("invoices")) || [];
+    invoices.forEach(addTableRow);
+  }
+
+  // Function to get invoices from local storage
+  function getInvoices() {
+    return JSON.parse(localStorage.getItem("invoices")) || [];
+  }
+
+  // Open the modal
   btn.onclick = function () {
     modal.style.display = "block";
+    // Reset form and clear any previous edit state
+    document.getElementById("invoiceForm").reset();
+    document.getElementById("invoiceForm").removeAttribute("data-edit-id");
   };
 
-  // Close the modal when the close button is clicked
+  // Close the modal
   span.onclick = function () {
     modal.style.display = "none";
   };
 
-  // Close the modal when clicking outside of the modal content
+  // Close when clicking outside
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
   };
 
-  // Handle form submission
-  document.getElementById("invoiceForm").onsubmit = function (event) {
-    event.preventDefault(); // Prevent the default form submission
+  // Load existing invoices from local storage when the page loads
+  loadInvoices();
 
-    // Get form data
+  // Handle form submission for both create and edit
+  document.getElementById("invoiceForm").onsubmit = function (event) {
+    event.preventDefault();
+
     const customerName = document.getElementById("customer").value;
     const amount = parseFloat(document.getElementById("amount").value);
     const paymentStatus = document.getElementById("paymentStatus").value;
     const orderStatus = document.getElementById("orderStatus").value;
 
-    // Create an invoice object
-   const invoiceData = {
-     customer_name: customerName,
-     amount: amount,
-     payment_status: paymentStatus,
-     order_status: orderStatus, 
-   };
+    // Generate invoice_id if we're creating a new invoice
+    const editId = this.getAttribute("data-edit-id");
+    const isEditing = !!editId;
+    const invoiceId = isEditing ? editId : generateInvoiceId(); // Use generated ID if not editing
 
-    // Send data to the backend
-    fetch("/api/invoices", {
-      method: "POST",
+    const invoiceData = {
+      invoice_id: invoiceId,
+      customer_name: customerName,
+      amount: amount,
+      payment_status: paymentStatus,
+      order_status: orderStatus,
+    };
+
+    const url = isEditing ? `/api/invoices/${editId}` : "/api/invoices";
+    const method = isEditing ? "PUT" : "POST";
+
+    fetch(url, {
+      method: method,
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(invoiceData),
     })
-      .then((response) => {
-        console.log("Response status:", response.status); // Log the status code
-        return response.json().then((data) => {
-          if (!response.ok)
-            throw new Error(data.error || "Network response was not ok");
-          return data;
-        });
-      })
+      .then((response) => response.json())
       .then((data) => {
-        // Handle success - add the new invoice to the table
-        const invoiceTableBody = document
-          .getElementById("invoiceTable")
-          .querySelector("tbody");
+        let invoices = getInvoices();
 
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-        <td>${customerName}</td>
-        <td>${amount}</td>
-        <td>${paymentStatus}</td>
-        <td>${orderStatus}</td>
-        <td>
-          <button><i class="fas fa-edit"></i></button>
-          <button><i class="fas fa-trash-alt"></i></button>
-        </td>
-      `;
-        invoiceTableBody.prepend(newRow); // Add the new row at the top of the table
+        if (isEditing) {
+          // Update existing row in local storage
+          const index = invoices.findIndex(
+            (invoice) => invoice.invoice_id === editId
+          );
+          invoices[index] = invoiceData;
 
-        // Clear the form fields
-        document.getElementById("invoiceForm").reset();
-        // Close the modal
+          // Update existing row in the table
+          const row = document.querySelector(`tr[data-invoice-id="${editId}"]`);
+          updateTableRow(row, invoiceData);
+        } else {
+          // Add new row and store it in local storage
+          invoices.push(invoiceData);
+          addTableRow(invoiceData);
+        }
+
+        // Store updated invoices
+        storeInvoices(invoices);
+
+        // Clear form and close modal
+        this.reset();
+        this.removeAttribute("data-edit-id");
         modal.style.display = "none";
+
+        alert(
+          isEditing
+            ? "Invoice updated successfully!"
+            : "Invoice created successfully!"
+        );
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("Failed to create invoice. Please try again.");
+        alert(
+          "Failed to " +
+            (isEditing ? "update" : "create") +
+            " invoice. Please try again."
+        );
       });
   };
+
+  // Function to add a new row to the table
+  function addTableRow(data) {
+    const newRow = document.createElement("tr");
+    newRow.setAttribute("data-invoice-id", data.invoice_id);
+    updateTableRow(newRow, data);
+    invoiceTableBody.prepend(newRow);
+
+    // Add event listeners for the new row
+    addRowEventListeners(newRow);
+  }
+
+  // Function to update an existing row
+  function updateTableRow(row, data) {
+    row.innerHTML = `
+    <td>${data.invoice_id}</td>
+    <td>${data.customer_name}</td>
+    <td>&#8373;${
+      data.amount !== undefined ? data.amount.toFixed(2) : "0.00"
+    }</td>
+    <td>${data.payment_status}</td>
+    <td>${data.order_status}</td>
+    <td class="actions-1">
+      <i class="fas fa-edit"></i>
+      <i class="fas fa-trash"></i>
+    </td>
+  `;
+  }
+
+  // Function to add event listeners to a row
+  function addRowEventListeners(row) {
+    const editIcon = row.querySelector(".fa-edit");
+    const deleteIcon = row.querySelector(".fa-trash");
+
+    if (editIcon) {
+      editIcon.addEventListener("click", () => {
+        const invoiceId = row.getAttribute("data-invoice-id");
+        editInvoice(invoiceId, row);
+      });
+    }
+
+    if (deleteIcon) {
+      deleteIcon.addEventListener("click", () => {
+        const invoiceId = row.getAttribute("data-invoice-id");
+        deleteInvoice(invoiceId, row);
+      });
+    }
+  }
+
+  // Function to edit an invoice
+  function editInvoice(invoiceId, row) {
+    // Populate form with current values
+    document.getElementById("customer").value =
+      row.querySelector("td:nth-child(2)").textContent;
+    document.getElementById("amount").value = row
+      .querySelector("td:nth-child(3)")
+      .textContent.replace("₵", "");
+    document.getElementById("paymentStatus").value =
+      row.querySelector("td:nth-child(4)").textContent;
+    document.getElementById("orderStatus").value =
+      row.querySelector("td:nth-child(5)").textContent;
+
+    // Set form to edit mode
+    const form = document.getElementById("invoiceForm");
+    form.setAttribute("data-edit-id", invoiceId);
+
+    // Show modal
+    modal.style.display = "block";
+  }
+
+  // Function to delete an invoice
+  function deleteInvoice(invoiceId, row) {
+    if (confirm("Are you sure you want to delete this invoice?")) {
+      fetch(`/api/invoices/${invoiceId}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          row.remove(); // Remove the row from the table
+
+          // Remove from local storage
+          let invoices = getInvoices();
+          invoices = invoices.filter(
+            (invoice) => invoice.invoice_id !== invoiceId
+          );
+          storeInvoices(invoices);
+
+          alert("Invoice deleted successfully!");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Failed to delete invoice. Please try again.");
+        });
+    }
+  }
+
+  // Add event listeners to existing rows
+  document.querySelectorAll("#invoiceTable tbody tr").forEach((row) => {
+    addRowEventListeners(row);
+  });
 });
 
 // Add category pop up
@@ -203,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addCategoryBtn = document.getElementById("addCategoryBtn");
   const closePopup = document.getElementById("closePopup");
   const submitBtn = document.getElementById("submitBtn");
-  const categoryTable = document.getElementById("categoryTableBody"); // Use the correct ID for tbody
+  const categoryTable = document.getElementById("categoryTableBody");
 
   // Load categories from localStorage and populate the table
   function loadCategories() {
@@ -224,7 +367,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Add event listeners for edit and delete buttons
       newRow.querySelector(".fa-edit").addEventListener("click", editCategory);
-      newRow.querySelector(".fa-trash").addEventListener("click", deleteCategory);
+      newRow
+        .querySelector(".fa-trash")
+        .addEventListener("click", deleteCategory);
     });
   }
 
@@ -233,7 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to generate a unique category ID
   function generateCategoryId() {
-    return 'cat_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+    return "cat_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
   }
 
   // Handle category submission
@@ -253,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newCategory = {
       id: categoryId,
       name: name,
-      lastUpdated: lastUpdated
+      lastUpdated: lastUpdated,
     };
 
     // Store category data in localStorage
@@ -317,7 +462,9 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       // Update localStorage
       const categories = JSON.parse(localStorage.getItem("categories")) || [];
-      const categoryIndex = categories.findIndex((category) => category.id === categoryId);
+      const categoryIndex = categories.findIndex(
+        (category) => category.id === categoryId
+      );
       if (categoryIndex !== -1) {
         categories[categoryIndex].name = newName;
         categories[categoryIndex].lastUpdated = newDate;
@@ -356,7 +503,9 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         // Remove from localStorage
         const categories = JSON.parse(localStorage.getItem("categories")) || [];
-        const updatedCategories = categories.filter(category => category.id !== categoryId);
+        const updatedCategories = categories.filter(
+          (category) => category.id !== categoryId
+        );
         localStorage.setItem("categories", JSON.stringify(updatedCategories));
 
         // Remove table row
@@ -392,7 +541,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 });
-
 
 const fileInput = document.getElementById("file-input");
 const fileNameSpan = document.getElementById("file-name");
@@ -657,55 +805,239 @@ function clearForm() {
 }
 
 // Add Expense
-// Show the modal when the "Add Expense" button is clicked
-document
-  .getElementById("addExpenseButton")
-  .addEventListener("click", function () {
-    document.getElementById("expenseModal").style.display = "block";
+
+// Expense ID Generator
+function generateExpenseId() {
+  return 'EXP-' + Math.floor(100000 + Math.random() * 900000);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const expenseModal = document.getElementById("expenseModal");
+  const addExpenseButton = document.getElementById("addExpenseButton");
+  const closeModal = document.getElementById("closeModal-1");
+  const submitExpense = document.getElementById("submitExpense");
+  const expenseTableBody = document.getElementById("expenseTable");
+
+  // Open expense modal
+  addExpenseButton.addEventListener("click", function() {
+    expenseModal.style.display = "block";
   });
 
-// Close the modal when the close button is clicked
-document.getElementById("closeModal").addEventListener("click", function () {
-  document.getElementById("expenseModal").style.display = "none";
-});
-
-// Close the modal when clicking outside of the modal content
-window.onclick = function (event) {
-  if (event.target === expenseModal) {
+  // Close expense modal
+  closeModal.addEventListener("click", function() {
     expenseModal.style.display = "none";
+  });
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    if (event.target === expenseModal) {
+      expenseModal.style.display = "none";
+    }
+  };
+
+  // Handle form submission
+  submitExpense.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const expenseId = generateExpenseId();
+    const date = document.getElementById("modalDate").value;
+    const category = document.getElementById("modalCategory").value;
+    const description = document.getElementById("modalDescription").value;
+    const amount = document.getElementById("modalAmount").value;
+
+    // Validate inputs
+    if (!date || !category || !description || !amount) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    const expenseData = {
+      expense_id: expenseId,
+      expense_date: date,
+      category: category,
+      description: description,
+      amount: parseFloat(amount),
+    };
+
+    // Send data to backend
+    fetch('/api/expenses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(expenseData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Add new row to table
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${date}</td>
+        <td>${category}</td>
+        <td>${description}</td>
+        <td>&#8373;${parseFloat(amount).toFixed(2)}</td>
+        <td class="actions">
+          <i class="fas fa-trash-alt" data-expense-id="${expenseId}"></i>
+        </td>
+      `;
+      expenseTableBody.appendChild(newRow);
+
+      // Clear form and close modal
+      document.getElementById("modalDate").value = '';
+      document.getElementById("modalCategory").value = '';
+      document.getElementById("modalDescription").value = '';
+      document.getElementById("modalAmount").value = '';
+      expenseModal.style.display = "none";
+
+      alert("Expense added successfully!");
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Failed to add expense. Please try again.");
+    });
+  });
+
+  // Handle delete expense
+  expenseTableBody.addEventListener('click', function(e) {
+    if (e.target.classList.contains('fa-trash-alt')) {
+      const expenseId = e.target.getAttribute('data-expense-id');
+      if (confirm('Are you sure you want to delete this expense?')) {
+        deleteExpense(expenseId, e.target.closest('tr'));
+      }
+    }
+  });
+
+  function deleteExpense(expenseId, row) {
+    fetch(`/api/expenses/${expenseId}`, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      row.remove();
+      alert("Expense deleted successfully!");
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Failed to delete expense. Please try again.");
+    });
   }
-};
-
-// Add expense to the table when the "Add" button in the modal is clicked
-document.getElementById("submitExpense").addEventListener("click", function () {
-  const modalDate = document.getElementById("modalDate").value;
-  const modalCategory = document.getElementById("modalCategory").value;
-  const modalDescription = document.getElementById("modalDescription").value;
-  const modalAmount = document.getElementById("modalAmount").value;
-
-  // Create a new row for the table
-  const newRow = document.createElement("tr");
-  newRow.innerHTML = `
-        <td>${modalDate}</td>
-        < td>${modalCategory}</td>
-        <td>${modalDescription}</td>
-        <td>${modalAmount}</td>
-        <td><button><i class="fas fa-edit"></i></button><button><i class="fas fa-trash-alt"></i></button></td>
-    `;
-  document.getElementById("expenseTableBody").appendChild(newRow);
-
-  // Clear the modal fields
-  document.getElementById("modalDate").value = "";
-  document.getElementById("modalCategory").value = "";
-  document.getElementById("modalDescription").value = "";
-  document.getElementById("modalAmount").value = "";
-
-  // Close the modal
-  document.getElementById("expenseModal").style.display = "none";
 });
 
+
+
+// Customers
 document.addEventListener("DOMContentLoaded", function () {
-  const logoutButton = document.querySelector(".logout"); // Adjust selector if necessary
+  const modal = document.getElementById("customerModal");
+  const addCustomerButton = document.querySelector(".customer-btn");
+  const closeBtn = document.querySelector(".close");
+  const form = document.getElementById("customerForm");
+  const customerTableBody = document.querySelector(".c-container tbody");
+
+  // Open modal when Add Customer button is clicked
+  addCustomerButton.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  // Close modal when (x) is clicked
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // Close modal when clicking outside of it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Function to generate a random customer ID
+  function generateRandomId() {
+    return "CUST-" + Math.random().toString(36).slice(2, 9).toUpperCase();
+  }
+  // Load customers from local storage and display them in the table
+  function loadCustomers() {
+    const customers = JSON.parse(localStorage.getItem("customers")) || [];
+    customers.forEach((customer) => {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td class="row-name">${customer.name}</td>
+        <td class="row-telephone">${customer.telephone_number}</td>
+        <td class="row-orders">${customer.total_orders}</td>
+        <td class="row-spent">&#8373;${customer.amount_paid.toFixed(2)}</td>
+      `;
+      customerTableBody.appendChild(newRow);
+    });
+  }
+
+  // Handle form submission
+  form.onsubmit = function (e) {
+    e.preventDefault();
+
+    const id = generateRandomId(); // Generate a random customer ID
+    const name = document.getElementById("customerName").value;
+    const telephone = document.getElementById("customerTelephone").value;
+    const orders = document.getElementById("customerOrders").value;
+    const spent = document.getElementById("customerSpent").value;
+
+    // Prepare data to send to the API
+    const customerData = {
+      customer_id: id,
+      name: name,
+      telephone_number: telephone,
+      total_orders: parseInt(orders),
+      amount_paid: parseFloat(spent),
+    };
+
+    // Send data to the API
+    fetch("/api/customers/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(customerData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Create new table row
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+        <td class="row-name">${data.name}</td>
+        <td class="row-telephone">${data.telephone_number}</td>
+        <td class="row-orders">${data.total_orders}</td>
+        <td class="row-spent">&#8373;${data.amount_paid.toFixed(2)}</td>
+      `;
+
+        // Add new row to table
+        customerTableBody.appendChild(newRow);
+
+        // Update local storage
+        const customers = JSON.parse(localStorage.getItem("customers")) || [];
+        customers.push(customerData);
+        localStorage.setItem("customers", JSON.stringify(customers));
+
+        // Clear form and close modal
+        form.reset();
+        modal.style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  // Load existing customers when the page loads
+  loadCustomers();
+});
+
+// Logout
+document.addEventListener("DOMContentLoaded", function () {
+  const logoutButton = document.querySelector(".logout"); 
   const logoutModal = document.getElementById("logoutModal");
   const closeLogoutModal = document.getElementById("closeLogoutModal");
   const confirmLogout = document.getElementById("confirmLogout");

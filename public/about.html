@@ -13,16 +13,6 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.all.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="script.js" defer></script>
@@ -77,6 +67,35 @@
         </span>
     </nav>
 
+    <!-- cart sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <i class="fa-solid fa-xmark close-icon" id="close-icon"></i>
+            <h2>My Cart</h2>
+            <p id="cart-status">Your cart is empty</p>
+        </div>
+        <!-- This will be the container for the cart items -->
+        <div class="cart-items">
+        </div>
+
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Enter Amount</span>
+                <span>
+                    GH&#8373;
+                    <input type="number" id="amount" value="00.00" min="0" step="0.01">
+                </span>
+            </div>
+            <!-- <p>Shipping and taxes calculated at checkout.
+          <a href="#">View Cart</a>
+        </p> -->
+            <button class="checkout">Checkout</button>
+            <p class="continue-shopping">or
+                <a href="#">Continue Shopping →</a>
+            </p>
+        </div>
+    </div>
+
     <div class="about--home">
         <h1 class="about--home--title">About Dromjors Ventures </h1>
         <div class="passage" data-aos="flip-up">
@@ -128,7 +147,7 @@
                     <ul class="social-icons">
                         <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-tiktok"></i></a></li>
                         <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
                     </ul>
                 </div>
@@ -160,6 +179,132 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
+    </script>
+
+    <script>
+        // Add to Cart SideBar
+
+        // Get the cart icon, cart sidebar, and close icon elements
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const closeIcon = document.getElementById('close-icon');
+
+        // Add event listeners to the cart icon and close icon
+        cartIcon.addEventListener('click', () => {
+            // Toggle the open class on the cart sidebar
+            cartSidebar.classList.toggle('open');
+
+            // Prevent body scrolling when the cart sidebar is open
+            if (cartSidebar.classList.contains('open')) {
+                document.body.classList.add('no-scroll');
+            } else {
+                document.body.classList.remove('no-scroll');
+            }
+        });
+
+        closeIcon.addEventListener('click', () => {
+            // Remove the open class from the cart sidebar
+            cartSidebar.classList.remove('open');
+            document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled
+        });
+
+        // Close sidebar on outside click
+        document.addEventListener('click', (event) => {
+            const isClickInside = cartSidebar.contains(event.target) || cartIcon.contains(event.target);
+
+            if (!isClickInside && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+                document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled
+            }
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};  // Load cart items from localStorage or initialize as empty object
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const cartNotificationSpan = document.querySelector('.cart-notification');
+            const cartStatus = document.getElementById('cart-status');
+            // Load existing cart items from localStorage
+            loadCartItemsFromLocalStorage();
+
+            function loadCartItemsFromLocalStorage() {
+                if (Object.keys(cartItems).length === 0) {
+                    cartStatus.textContent = 'Your cart is empty';
+                } else {
+                    Object.keys(cartItems).forEach(productId => {
+                        addNewCartItemToDisplay(productId);
+                    });
+                    updateTotalCount();
+                    updateCartStatus();
+                }
+            }
+
+            function addNewCartItemToDisplay(productId) {
+                const productHTML = `
+        <div class="cart-item" data-product-id="${productId}">
+            <div class="cart-item-image-container">
+                <img src="${cartItems[productId].image}" alt="${cartItems[productId].name}">
+                <span class="cart-item-quantity">${cartItems[productId].quantity}</span>
+            </div>
+            <h2>${cartItems[productId].name}</h2>
+            <input type="number" class="cart-item-quantity-input" value="${cartItems[productId].quantity}" min="0" step="1">
+            <span class="remove-item">
+                <i class="fas fa-trash-alt"></i>
+            </span>
+        </div>
+        `;
+
+                const cartItem = document.createElement("div");
+                cartItem.innerHTML = productHTML;
+
+                cartItem.querySelector(".remove-item").addEventListener("click", () => {
+                    // Check the current quantity
+                    if (cartItems[productId].quantity > 1) {
+                        // Decrement the quantity
+                        cartItems[productId].quantity -= 1;
+
+                        // Update the displayed quantity in both the span and the input
+                        const quantitySpan = cartItem.querySelector(".cart-item-quantity");
+                        const quantityInput = cartItem.querySelector(".cart-item-quantity-input");
+
+                        // Update the displayed quantity
+                        quantitySpan.textContent = cartItems[productId].quantity;
+                        quantityInput.value = cartItems[productId].quantity;
+                    } else {
+                        // Remove item from cart object if quantity is 1
+                        cartItemsContainer.removeChild(cartItem);
+                        delete cartItems[productId];
+                    }
+
+                    updateCartItemsCountAndTotal();
+
+                    // Update localStorage after item removal or quantity decrement
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                });
+
+                cartItemsContainer.appendChild(cartItem);
+            }
+
+            function updateTotalCount() {
+                const totalCount = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+                cartNotificationSpan.textContent = totalCount;
+            }
+
+            function updateCartStatus() {
+                if (cartItemsContainer.children.length > 0) {
+                    cartStatus.textContent = 'You have items in your cart';
+                } else {
+                    cartStatus.textContent = 'Your cart is empty';
+                }
+            }
+
+            function updateCartItemsCountAndTotal() {
+                updateTotalCount();
+                updateCartStatus();
+            }
+        });
+
     </script>
 </body>
 

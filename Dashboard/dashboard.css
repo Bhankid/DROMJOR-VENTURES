@@ -879,14 +879,35 @@ body {
 }
 
 .c-container h1 {
-    font-size: 24px;
+    font-size: 2.5rem;
     margin-bottom: 10px;
+    text-align: center;
+}
+
+.c-container .top {
+   display: flex;
+   justify-content: space-between;
 }
 
 .c-container p.subtitle {
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 20px;
+}
+
+.customer-btn {
+    background-color: hsl(122, 39%, 49%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.customer-btn:hover {
+    background-color: hsl(123, 40%, 45%);
 }
 
 .c-container table {
@@ -923,6 +944,34 @@ body {
 
 .actions-1 i.fa-trash {
     color: red;
+}
+
+#customerForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#customerForm label {
+    margin-top: 10px;
+}
+
+#customerForm input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#addCustomerBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#addCustomerBtn:hover {
+    background-color: #45a049;
 }
 
 

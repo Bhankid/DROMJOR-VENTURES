@@ -1354,13 +1354,16 @@ Desktop Slider
 
 .introduction {
   background-color: #ebebeb;
-  margin-top: 0;
-  padding-top: 0;
+  margin-block: 0;
+  padding-block: 0;
+  width: 100vw;
+  height: 70vh;
 }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-inline: auto;
+  height: 100%;
 }
 
 .row {
@@ -1378,17 +1381,18 @@ Desktop Slider
 .text h2 {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .image {
   width: 50%;
-  padding-block: 2px;
+  height: 100%;
+  padding-block: 0;
 }
 
 .image img {
   width: 100%;
-  height: 80%;
+  height: 50%;
   object-fit: cover;
 }
 
@@ -1399,8 +1403,8 @@ Desktop Slider
 
   .introduction {
     margin-bottom: 0 !important;
-    padding-top: 100px;
-    margin-top: 40px;
+    padding-top: 80px;
+    margin-top: 30px;
   }
 
   .text {
@@ -1422,8 +1426,8 @@ Desktop Slider
 @media only screen and (max-width: 480px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 45px;
-    padding-top: 100px;
+    margin-top: 25px;
+    padding-top: 60px;
   }
 
   .text {
@@ -1444,8 +1448,8 @@ Desktop Slider
 @media only screen and (max-width: 320px) {
   .introduction {
     margin-bottom: 0 !important;
-    margin-top: 50px;
-    padding-top: 100px;
+    margin-top: 25px;
+    padding-top: 55px;
   }
 
   .products {
@@ -1455,13 +1459,14 @@ Desktop Slider
 
 /* Products and services */
 .products {
-  padding: 70px 0;
-  margin: 0 auto;
+  padding: 40px 0;
+  margin-inline: auto;
+  margin-block: 0;
 }
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-inline: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;

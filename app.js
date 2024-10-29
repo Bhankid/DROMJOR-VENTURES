@@ -257,20 +257,19 @@ app.post("/api/add-to-cart", (req, res) => {
 
 // API endpoint to insert invoice data
 app.post('/api/invoices', (req, res) => {
-    const { customer_name, amount, payment_status, order_status } = req.body;
+    const { invoice_id, customer_name, amount, payment_status, order_status } = req.body;
 
     // Validate input data
-    if (!customer_name || !amount || !payment_status || !order_status) {
+    if (!invoice_id || !customer_name || !amount || !payment_status || !order_status) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
-    // SQL query to insert a new invoice
+    // SQL query to insert a new invoice with the invoice_id
     const query = `
-        INSERT INTO Invoice (customer_name, amount, payment_status, order_status) 
-        VALUES (?, ?, ?, ?)
+        INSERT INTO Invoice (invoice_id, customer_name, amount, payment_status, order_status) 
+        VALUES (?, ?, ?, ?, ?)
     `;
-
-    const values = [customer_name, amount, payment_status, order_status];
+    const values = [invoice_id, customer_name, amount, payment_status, order_status];
 
     // Execute the query
     db.query(query, values, (error, results) => {
@@ -278,15 +277,75 @@ app.post('/api/invoices', (req, res) => {
             console.error('Error inserting invoice:', error);
             return res.status(500).json({ error: 'An error occurred while inserting the invoice' });
         }
-        res.status(201).json({ message: 'Invoice created successfully', invoiceId: results.insertId });
+        res.status(201).json({ message: 'Invoice created successfully', invoiceId: invoice_id });
     });
 });
+
+
 
 // Catch-all error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: "Something went wrong!", details: err.message });
 });
+
+// Update an invoice
+// Update an invoice by invoice_id
+app.put('/api/invoices/:invoice_id', (req, res) => {
+    const { customer_name, amount, payment_status, order_status } = req.body;
+    const invoiceId = req.params.invoice_id;
+
+    // Validate input data
+    if (!customer_name || !amount || !payment_status || !order_status) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    // SQL query to update the invoice based on invoice_id
+    const query = `
+        UPDATE Invoice
+        SET customer_name = ?, amount = ?, payment_status = ?, order_status = ?
+        WHERE invoice_id = ?
+    `;
+
+    db.query(query, [customer_name, amount, payment_status, order_status, invoiceId], (error, results) => {
+        if (error) {
+            console.error('Error updating invoice:', error);
+            return res.status(500).json({ error: 'An error occurred while updating the invoice' });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Invoice not found' });
+        }
+
+        res.status(200).json({ message: 'Invoice updated successfully' });
+    });
+});
+
+
+
+// Delete an invoice
+// Delete an invoice by invoice_id
+app.delete('/api/invoices/:invoice_id', (req, res) => {
+    const invoiceId = req.params.invoice_id;
+
+    // SQL query to delete the invoice based on invoice_id
+    const query = 'DELETE FROM Invoice WHERE invoice_id = ?';
+
+    db.query(query, [invoiceId], (error, results) => {
+        if (error) {
+            console.error('Error deleting invoice:', error);
+            return res.status(500).json({ error: 'An error occurred while deleting the invoice' });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Invoice not found' });
+        }
+
+        res.status(200).json({ message: 'Invoice deleted successfully' });
+    });
+});
+
+
 
 // Handle POST request to add a category
 app.post('/api/categories', (req, res) => {
@@ -357,6 +416,118 @@ app.delete("/api/categories/:id", (req, res) => {
 });
 
 
+// Create new expense
+app.post("/api/expenses", (req, res) => {
+  const { expense_id, expense_date, category, description, amount } = req.body;
+
+  // Validate input data
+  if (!expense_id || !expense_date || !category || !amount) {
+    return res
+      .status(400)
+      .json({ error: "All fields are required except description" });
+  }
+
+  // SQL query to insert new expense
+  const query = `
+    INSERT INTO expenses (expense_id, expense_date, category, description, amount)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  const values = [expense_id, expense_date, category, description, amount];
+
+  db.query(query, values, (error, results) => {
+    if (error) {
+      console.error("Error inserting expense:", error);
+      return res.status(500).json({
+        error: "An error occurred while adding the expense",
+      });
+    }
+
+    res.status(201).json({
+      message: "Expense added successfully",
+      expenseId: expense_id,
+    });
+  });
+});
+
+
+// Delete expense
+app.delete('/api/expenses/:expense_id', (req, res) => {
+  const expenseId = req.params.expense_id;
+
+  const query = 'DELETE FROM expenses WHERE expense_id = ?';
+
+  db.query(query, [expenseId], (error, results) => {
+    if (error) {
+      console.error('Error deleting expense:', error);
+      return res.status(500).json({ 
+        error: 'An error occurred while deleting the expense' 
+      });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ error: 'Expense not found' });
+    }
+
+    res.status(200).json({ message: 'Expense deleted successfully' });
+  });
+});
+
+// Get all expenses
+app.get('/api/expenses', (req, res) => {
+  const query = 'SELECT * FROM expenses ORDER BY date DESC';
+
+  db.query(query, (error, results) => {
+    if (error) {
+      console.error('Error fetching expenses:', error);
+      return res.status(500).json({ 
+        error: 'An error occurred while fetching expenses' 
+      });
+    }
+
+    res.status(200).json(results);
+  });
+});
+
+
+// Endpoint to add a new customer
+app.post('/api/customers', (req, res) => {
+  const { customer_id, name, telephone_number, total_orders, amount_paid } = req.body;
+
+  const query = 'INSERT INTO customers (customer_id, name, telephone_number, total_orders, amount_paid) VALUES (?, ?, ?, ?, ?)';
+  db.query(query, [customer_id, name, telephone_number, total_orders, amount_paid], (error, results) => {
+    if (error) {
+      console.error('Error inserting customer:', error);
+      return res.status(500).json({ error: error.message });
+    }
+    res.status(201).json({ id: customer_id, name, telephone_number, total_orders, amount_paid });
+  });
+});
+
+// Endpoint to get all customers
+// app.get('/api/customers', (req, res) => {
+//   const query = 'SELECT * FROM customers';
+//   db.query(query, (error, results) => {
+//     if (error) {
+//       console.error('Error fetching customers:', error);
+//       return res.status(500).json({ error: error.message });
+//     }
+//     res.status(200).json(results);
+//   });
+// });
+
+// Endpoint to delete a customer by ID
+// app.delete('/api/customers/:id', (req, res) => {
+//   const customerId = req.params.id;
+//   const query = 'DELETE FROM customers WHERE customer_id = ?';
+//   db.query(query, [customerId], (error, results) => {
+//     if (error) {
+//       console.error('Error deleting customer:', error);
+//       return res.status(500).json({ error: error.message });
+//     }
+//     res.status(204).send();
+//   });
+// });
 
 
 // Connect to the database and start the server
